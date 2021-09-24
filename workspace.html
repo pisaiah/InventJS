@@ -21,9 +21,13 @@
         <h4 style="background-color:black;color:white;padding:4px;padding-left:8px;padding-right:8px;border-radius:4px;margin-right:1rem;">
             InventJS&trade;
         </h4>
-        <span>Saving: <span class="btn" onclick="saveBlocks('test')">Save As...</span>&nbsp;
+            <span>Saving: <span class="btn" onclick="saveB()">Save</span>&nbsp;
+            <span class="btn" onclick="saveBlocks()">Save As...</span>
+
+        </span>
+        <span>&nbsp;|&nbsp; <span class="btn" onclick="downloadP('test')">Download Project</span>&nbsp;
             <input type="file" id="files" style="display:none;"/>
-<label for="files" class="btn">Load Project</label>
+<label for="files" class="btn">Load from Download</label>
 
         </span>
     </div>
@@ -607,18 +611,44 @@ function openCity(evt, cityName) {
   evt.currentTarget.className += " w3-gblack";
 }
 
-function saveBlocks(name) {
+function downloadP(name) {
     var xmlText = Blockly.Xml.domToPrettyText( Blockly.Xml.workspaceToDom(workspace) );
-        
-    localStorage.name = xmlText;
-    console.log(localStorage.name);
-    
     download(name + ".xml", "<!-- Copyright (C) 2021 by Isaiah -->\n" + xmlText);
+}
 
+var pId;
+
+function saveB() {
+  if (undefined == pId) {
+    saveBlocks();
+    return;
+  }
+  var xmlText = Blockly.Xml.domToPrettyText( Blockly.Xml.workspaceToDom(workspace) );  
+  localStorage.setItem(pId, xmlText);
+  window.alert('Saved project with ID: ' + pId);
 }
-if (undefined != localStorage.name) {
-    loadBlock(localStorage.name);
+
+function saveBlocks(name) {
+  var xmlText = Blockly.Xml.domToPrettyText( Blockly.Xml.workspaceToDom(workspace) );  
+  if (name != null) {
+    localStorage.setItem(name, xmlText);
+    return;
+  }
+  var person = prompt("Enter ID to Save As.", pId);
+  if (person != null) {
+    localStorage.setItem(person, xmlText);
+    console.log(localStorage.getItem(person));
+  }
 }
+
+var queryString = window.location.search;
+var urlParams = new URLSearchParams(queryString);
+if (queryString.indexOf("projectId") != -1) {
+    pId = urlParams.get("projectId")
+    loadBlock(localStorage.getItem(pId));
+    console.log(pId);
+}
+
 
 function loadBlock(xml) { // xml is the same block xml you stored
   if (typeof xml != "string" || xml.length < 5) return false;

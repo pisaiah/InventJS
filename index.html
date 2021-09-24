@@ -11,6 +11,7 @@
 
     .w3-bar .w3-right {padding-right:2rem;align:middle;}
     .w3-bar a {text-decoration:none; vertical-align:middle;}
+    #projects a {margin:4px;}
     </style>
   </head>
   <body style="background-color:#EBF7E3;">
@@ -37,27 +38,50 @@
   </div>
   <div class="w3-container w3-padding-small w3-theme-d3">&nbsp;</div>
 
-  <div class="w3-bar" style="position:absolute;width:100%;bottom:0;padding:.9rem;background-color:#1B3409;color:white;padding-bottom:1.1rem;">Copyright &copy; 2021 by Isaiah.</div>
+  <div class="w3-bar" style="position:absolute;width:100%;bottom:0;padding:.9rem;background-color:#1B3409;color:white;padding-bottom:1.1rem;">
+    Copyright &copy; 2021 by Isaiah. Licensed under LGPL: 
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/LGPLv3_Logo.svg/1200px-LGPLv3_Logo.svg.png" width="80">
+  </div>
   
   <div class="w3-large w3-content" style="padding-top:1rem;background:#EBF7E3;">
-    <h3>What is InventJS</h3>
-    <div class="w3-container">
-        An alternative to MIT App Inventor for web development.<br>
-        InventJS lets you develop JS applications using a Google Blockly&trade; interface.<br>
-        Projects save to browser's localStorage
-    </div>
-    <h3>My Projects</h3>
-    <div>
-      <div id="test"></div>
-    </div>
-    <div>
-      
+    <div class="w3-row" style="padding-top:1rem;">
+      <div class="w3-half">
+        <h3>What is InventJS</h3><hr>
+        <div class="w3-container">
+            InventJS lets you develop JS applications<br>using a Google Blockly&trade; interface.<br>
+            <br>Alternative to MIT App Inventor for JS.
+        </div>
+      </div>
+      <div class="w3-rest" style="padding-top:1rem;">
+        <div>
+            <a href="./workspace.html?createNewProject"><button class="w3-theme w3-button">New Empty Project</button></a>
+        </div>
+        <h3>My Projects <i><small>(From browser's localStorage)</small></i></h3>
+        <div id="projects">
+          <div id="test"></div>
+        </div>
+        <div>
+        </div>
+      </div>
     </div>
   </div>
   </body>
 
 <script>
-  document.getElementById("test").innerHTML = localStorage.name;
+for (var i = 0; i < localStorage.length; i++) {
+  var key = localStorage.key(i);
+  var value = localStorage.getItem(key);
+  console.log('Key: ' + key + ', Value: ' + value);
+  
+  if (value.toString().indexOf('<xml xmlns="https://developers.google.com/blockly/xml">') == -1) {
+    // Not Saved Project.
+    continue;
+  }
+  var a = document.createElement('a');
+  a.href = "./workspace.html?projectId=" + key;
+  a.innerHTML = "<button title='Project Preview Data:\n"+value+"' class='w3-theme w3-button'>" + key + "</button>";  
+  document.getElementById("projects").appendChild(a);
+}
 </script>
 
 </html>
