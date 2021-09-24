@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/blockly@6.20210701.0/dart_compressed.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify.min.js"></script>
     <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+    <script src="./customblocks.js"></script>
     <style>.sc {overflow: auto;} .title * { display:inline-block;min-width:32px; }
     .bord { border:1px solid rgb(180,180,180);border-radius:2px; }
     .btn {background-color:rgb(233,233,237);padding: 2px 4px 2px 4px;border:1px solid rgb(143,143,157);border-radius:5px;cursor:pointer;}
@@ -73,30 +74,14 @@
 </category>
 <category name="Loops" categorystyle="loop_category">
   <block type="controls_repeat_ext">
-    <value name="TIMES">
-      <shadow type="math_number">
-        <field name="NUM">10</field>
-      </shadow>
-    </value>
+    <value name="TIMES"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
   </block>
   <block type="controls_repeat" disabled="true"></block>
   <block type="controls_whileUntil"></block>
   <block type="controls_for">
-    <value name="FROM">
-      <shadow type="math_number">
-        <field name="NUM">1</field>
-      </shadow>
-    </value>
-    <value name="TO">
-      <shadow type="math_number">
-        <field name="NUM">10</field>
-      </shadow>
-    </value>
-    <value name="BY">
-      <shadow type="math_number">
-        <field name="NUM">1</field>
-      </shadow>
-    </value>
+    <value name="FROM"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+    <value name="TO"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+    <value name="BY"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
   </block>
   <block type="controls_forEach"></block>
   <block type="controls_flow_statements"></block>
@@ -106,53 +91,25 @@
     <field name="NUM">123</field>
   </block>
   <block type="math_arithmetic">
-    <value name="A">
-      <shadow type="math_number">
-        <field name="NUM">1</field>
-      </shadow>
-    </value>
-    <value name="B">
-      <shadow type="math_number">
-        <field name="NUM">1</field>
-      </shadow>
-    </value>
+    <value name="A"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+    <value name="B"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
   </block>
   <block type="math_single">
-    <value name="NUM">
-      <shadow type="math_number">
-        <field name="NUM">9</field>
-      </shadow>
-    </value>
+    <value name="NUM"><shadow type="math_number"><field name="NUM">9</field></shadow></value>
   </block>
   <block type="math_trig">
-    <value name="NUM">
-      <shadow type="math_number">
-        <field name="NUM">45</field>
-      </shadow>
-    </value>
+    <value name="NUM"><shadow type="math_number"><field name="NUM">45</field></shadow></value>
   </block>
   <block type="math_constant"></block>
   <block type="math_number_property">
-    <value name="NUMBER_TO_CHECK">
-      <shadow type="math_number">
-        <field name="NUM">0</field>
-      </shadow>
-    </value>
+    <value name="NUMBER_TO_CHECK"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
   </block>
   <block type="math_round">
-    <value name="NUM">
-      <shadow type="math_number">
-        <field name="NUM">3.1</field>
-      </shadow>
-    </value>
+    <value name="NUM"><shadow type="math_number"><field name="NUM">3.1</field></shadow></value>
   </block>
   <block type="math_on_list"></block>
   <block type="math_modulo">
-    <value name="DIVIDEND">
-      <shadow type="math_number">
-        <field name="NUM">64</field>
-      </shadow>
-    </value>
+    <value name="DIVIDEND"><shadow type="math_number"><field name="NUM">64</field></shadow></value>
     <value name="DIVISOR">
       <shadow type="math_number">
         <field name="NUM">10</field>
@@ -418,98 +375,6 @@ custom="PROCEDURE"></category>
     <script>
     var w = 0.99;
 
-    Blockly.Blocks['js_elm_by_id'] = {
-      init: function() {
-        this.appendValueInput('VALUE')
-            .appendField('getElementById')
-        this.setOutput(true, 'Number');
-        this.setColour(160);
-        this.setTooltip('Block form of Javascript\'s "getElementById(id)"');
-      }
-    };
-
-  Blockly.JavaScript['js_elm_by_id'] = function(block) {
-    var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return ['document.getElementById(' + argument0 + ')', document.getElementById(argument0)];
-  };
-  
-      Blockly.Blocks['js_elm_inner'] = {
-      init: function() {
-        this.appendValueInput('VALUE')
-            .appendField('getElementById(')
-            //.appendField(new Blockly.Field("myid"),"TEXT")
-            this.appendDummyInput('TXT')
-                .appendField(').innerHTML');
-        this.setInputsInline(true);
-        this.setOutput(true, 'Number');
-        this.setColour(160);
-        this.setTooltip('Block form of Javascript\'s "getElementById(id)"');
-      }
-    };
-
-  Blockly.JavaScript['js_elm_inner'] = function(block) {
-    var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return ['document.getElementById(' + argument0 + ').innerHTML', document.getElementById(argument0)];
-  };
-
-    Blockly.Blocks['js_create_elm'] = {
-      init: function() {
-        this.appendValueInput('VALUE')
-            .appendField('createButton')
-           // .appendField(new Blockly.FieldTextInput("myid"),"TEXT")
-        this.setPreviousStatement(!0);
-        this.setNextStatement(!0);
-        this.setOutput(0, 'Dummy');
-        this.setColour(160);
-        this.setTooltip('Add a new Element to the output box');
-      }
-    };
-
-    Blockly.JavaScript['js_create_elm'] = function(block) {
-        //var argument0 = block.getFieldValue('TEXT') || '\'\'';
-        var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-        return 'helper_createElement(\'button\', ' + argument0 + ');\n';
-    };
-
-    Blockly.Blocks['js_raw'] = {
-      init: function() {
-        this.appendDummyInput('VALUE')
-            .appendField('raw_js')
-            .appendField(new Blockly.FieldTextInput("myid"),"TEXT")
-        this.setPreviousStatement(!0);
-        this.setNextStatement(!0);
-        this.setOutput(0, 'Dummy');
-        this.setColour(160);
-        this.setTooltip('Add a new Element to the output box');
-      }
-    };
-
-    Blockly.JavaScript['js_raw'] = function(block) {
-        var argument0 = block.getFieldValue('TEXT') || '\'\'';
-        return argument0 + '\n';
-    };
-
-
-    Blockly.Blocks['js_2'] = {
-      init: function() {
-        this.appendValueInput('VAL1')
-            .appendField('getElementById(');
-            this.appendValueInput('VAL2')
-            //.appendField(new Blockly.FieldTextInput("myid"),"TEXT")
-            .appendField(').innerHTML =');
-        this.setInputsInline(true);
-        this.setPreviousStatement(!0);
-        this.setNextStatement(!0);
-        this.setOutput(0, 'Dummy');
-        this.setColour(160);
-        this.setTooltip('Set the content of an element');
-      }
-    };
-    Blockly.JavaScript['js_2'] = function(block) {
-        var argument0 = Blockly.JavaScript.valueToCode(block, 'VAL1', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-        var argument1 = Blockly.JavaScript.valueToCode(block, 'VAL2', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-        return 'document.getElementById(' + argument0 + ').innerHTML = ' + argument1 + ";";
-    };
 
 var blocklyArea = document.getElementById('blocklyArea');
   var blocklyDiv = document.getElementById('blocklyDiv');
@@ -613,16 +478,13 @@ function openCity(evt, cityName) {
 
 function downloadP(name) {
     var xmlText = Blockly.Xml.domToPrettyText( Blockly.Xml.workspaceToDom(workspace) );
-    download(name + ".xml", "<!-- Copyright (C) 2021 by Isaiah -->\n" + xmlText);
+    download(name + ".xml", "<!-- Copyright (C) 2021 -->\n" + xmlText);
 }
 
 var pId;
 
 function saveB() {
-  if (undefined == pId) {
-    saveBlocks();
-    return;
-  }
+  if (undefined == pId){ saveBlocks(); return; }
   var xmlText = Blockly.Xml.domToPrettyText( Blockly.Xml.workspaceToDom(workspace) );  
   localStorage.setItem(pId, xmlText);
   window.alert('Saved project with ID: ' + pId);
@@ -630,10 +492,7 @@ function saveB() {
 
 function saveBlocks(name) {
   var xmlText = Blockly.Xml.domToPrettyText( Blockly.Xml.workspaceToDom(workspace) );  
-  if (name != null) {
-    localStorage.setItem(name, xmlText);
-    return;
-  }
+  if (name != null){ localStorage.setItem(name, xmlText); return; }
   var person = prompt("Enter ID to Save As.", pId);
   if (person != null) {
     localStorage.setItem(person, xmlText);
