@@ -15,6 +15,7 @@
     .btn:hover {background-color:rgb(208,208,215);}
     .w3-gblack{ padding:5px 16px !important;border-bottom: 6px solid rgb(140,190,145) !important;}
     body {background:rgb(230,230,230);} .city,.bbg {background: rgb(247,247,247)}
+    .outputFrame { width:100%;height:100%; }
     </style>
 
   <div class="w3-container">
@@ -24,42 +25,29 @@
         </h4>
             <span>Saving: <span class="btn" onclick="saveB()">Save</span>&nbsp;
             <span class="btn" onclick="saveBlocks()">Save As...</span>
-
         </span>
         <span>&nbsp;|&nbsp; <span class="btn" onclick="downloadP('test')">Download Project</span>&nbsp;
-            <input type="file" id="files" style="display:none;"/>
-<label for="files" class="btn">Load from Download</label>
-
+            <input type="file" id="files" style="display:none;"/><label for="files" class="btn">Load from Download</label>
         </span>
     </div>
     
     <div class="w3-half sc" id="blocklyArea" style="float:left;width:55vw; height:86.5vh;">
         <div id="blocklyDiv" class="sc1 bord"></div>
     </div>
-    <div style="position:absolute;bottom:4px;left:1rem;">Credit: Blocky API by Google.</div>
+    <div style="position:absolute;bottom:4px;left:1rem;">&copy; 2021 by Isaiah. Credit: Blocky API by Google.</div>
 
-    <div class="" style="width:40vw;display:inline-block;padding-left:1rem;padding-right:1rem;margin-top:-2rem;">
+    <div class="" style="width:40vw;display:inline-block;padding-left:.7rem;margin-top:-2.5rem;">
       <div class="w3-bar w3-blak" style="margin:0;padding:0;">
         <span class="w3-bar-item">Code Output: </span>
         <button class="w3-bar-item w3-button tablink w3-gblack" onclick="openCity(event,'djs')">JS</button>
         <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'dpy')">Python</button>
         <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'ddart')">Dart</button>
       </div>
-
-  <div id="djs" class="w3-container w3-border city">
-    <div id="textarea" style="height:34vh;padding-top:1rem;" class="jsHigh sc">&nbsp;</div>
-  </div>
-
-  <div id="dpy" class="w3-container w3-border city" style="display:none">
-    <div id="textpy" style="height:34vh;padding-top:1rem;" class="pythonHigh sc">&nbsp;</div>
-  </div>
-  
-  <div id="ddart" class="w3-container w3-border city" style="display:none">
-    <div id="textdart" style="height:34vh;padding-top:1rem;" class="pythonHigh sc">&nbsp;</div>
-  </div>
-        <div class="title"><h5>Output:</h5> <button onclick="runC()">Run JS</button> </div>
-        <div id="output" class="bord bbg" style="height:40vh;padding:8px;">
-        </div>
+      <div id="djs" class="w3-container w3-border city"><div id="textarea" style="height:35vh;padding-top:1rem;width:100%;" class="jsHigh sc">&nbsp;</div></div>
+      <div id="dpy" class="w3-container w3-border city" style="display:none"><div id="textpy" style="height:35vh;padding-top:1rem;" class="pythonHigh sc">&nbsp;</div></div>
+      <div id="ddart" class="w3-container w3-border city" style="display:none"><div id="textdart" style="height:35vh;padding-top:1rem;" class="pythonHigh sc">&nbsp;</div></div>
+      <div class="title"><h5>Output:</h5> <button onclick="runC()">Run JS</button> </div>
+      <div id="output" class="bord bbg" style="height:40vh;padding:8px;"></div>
     </div>
     
     <xml id="toolbox" style="display: none">
@@ -87,9 +75,7 @@
   <block type="controls_flow_statements"></block>
 </category>
 <category name="Math" categorystyle="math_category">
-  <block type="math_number" gap="32">
-    <field name="NUM">123</field>
-  </block>
+  <block type="math_number" gap="32"><field name="NUM">123</field></block>
   <block type="math_arithmetic">
     <value name="A"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
     <value name="B"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
@@ -110,53 +96,22 @@
   <block type="math_on_list"></block>
   <block type="math_modulo">
     <value name="DIVIDEND"><shadow type="math_number"><field name="NUM">64</field></shadow></value>
-    <value name="DIVISOR">
-      <shadow type="math_number">
-        <field name="NUM">10</field>
-      </shadow>
-    </value>
+    <value name="DIVISOR"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
   </block>
   <block type="math_constrain">
-    <value name="VALUE">
-      <shadow type="math_number">
-        <field name="NUM">50</field>
-      </shadow>
+    <value name="VALUE"><shadow type="math_number"><field name="NUM">50</field></shadow></value>
+    <value name="LOW"><shadow type="math_number"><field name="NUM">1</field></shadow>
     </value>
-    <value name="LOW">
-      <shadow type="math_number">
-        <field name="NUM">1</field>
-      </shadow>
-    </value>
-    <value name="HIGH">
-      <shadow type="math_number">
-        <field name="NUM">100</field>
-      </shadow>
-    </value>
+    <value name="HIGH"><shadow type="math_number"><field name="NUM">100</field></shadow></value>
   </block>
   <block type="math_random_int">
-    <value name="FROM">
-      <shadow type="math_number">
-        <field name="NUM">1</field>
-      </shadow>
-    </value>
-    <value name="TO">
-      <shadow type="math_number">
-        <field name="NUM">100</field>
-      </shadow>
-    </value>
+    <value name="FROM"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+    <value name="TO"><shadow type="math_number"><field name="NUM">100</field></shadow></value>
   </block>
   <block type="math_random_float"></block>
   <block type="math_atan2">
-    <value name="X">
-      <shadow type="math_number">
-        <field name="NUM">1</field>
-      </shadow>
-    </value>
-    <value name="Y">
-      <shadow type="math_number">
-        <field name="NUM">1</field>
-      </shadow>
-    </value>
+    <value name="X"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+    <value name="Y"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
   </block>
 </category>
 <category name="Text" categorystyle="text_category">
@@ -164,102 +119,48 @@
   <block type="text_multiline"></block>
   <block type="text_join"></block>
   <block type="text_append">
-    <value name="TEXT">
-      <shadow type="text"></shadow>
-    </value>
+    <value name="TEXT"><shadow type="text"></shadow></value>
   </block>
   <block type="text_length">
-    <value name="VALUE">
-      <shadow type="text">
-        <field name="TEXT">abc</field>
-      </shadow>
-    </value>
+    <value name="VALUE"><shadow type="text"><field name="TEXT">abc</field></shadow></value>
   </block>
   <block type="text_isEmpty">
-    <value name="VALUE">
-      <shadow type="text">
-        <field name="TEXT"></field>
-      </shadow>
-    </value>
+    <value name="VALUE"><shadow type="text"><field name="TEXT"></field></shadow></value>
   </block>
   <block type="text_indexOf">
-    <value name="VALUE">
-      <block type="variables_get">
-        <field name="VAR">text</field>
-      </block>
-    </value>
-    <value name="FIND">
-      <shadow type="text">
-        <field name="TEXT">abc</field>
-      </shadow>
-    </value>
+    <value name="VALUE"><block type="variables_get"><field name="VAR">text</field></block></value>
+    <value name="FIND"><shadow type="text"><field name="TEXT">abc</field></shadow></value>
   </block>
   <block type="text_charAt">
-    <value name="VALUE">
-      <block type="variables_get">
-        <field name="VAR">text</field>
-      </block>
-    </value>
+    <value name="VALUE"><block type="variables_get"><field name="VAR">text</field></block></value>
   </block>
   <block type="text_getSubstring">
-    <value name="STRING">
-      <block type="variables_get">
-        <field name="VAR">text</field>
-      </block>
-    </value>
+    <value name="STRING"><block type="variables_get"><field name="VAR">text</field></block></value>
   </block>
   <block type="text_changeCase">
-    <value name="TEXT">
-      <shadow type="text">
-        <field name="TEXT">abc</field>
-      </shadow>
-    </value>
+    <value name="TEXT"><shadow type="text"><field name="TEXT">abc</field></shadow></value>
   </block>
   <block type="text_trim">
-    <value name="TEXT">
-      <shadow type="text">
-        <field name="TEXT">abc</field>
-      </shadow>
-    </value>
+    <value name="TEXT"><shadow type="text"><field name="TEXT">abc</field></shadow></value>
   </block>
   <block type="text_count">
-    <value name="SUB">
-      <shadow type="text"></shadow>
-    </value>
-    <value name="TEXT">
-      <shadow type="text"></shadow>
-    </value>
+    <value name="SUB"><shadow type="text"></shadow></value>
+    <value name="TEXT"><shadow type="text"></shadow></value>
   </block>
   <block type="text_replace">
-    <value name="FROM">
-      <shadow type="text"></shadow>
-    </value>
-    <value name="TO">
-      <shadow type="text"></shadow>
-    </value>
-    <value name="TEXT">
-      <shadow type="text"></shadow>
-    </value>
+    <value name="FROM"><shadow type="text"></shadow></value>
+    <value name="TO"><shadow type="text"></shadow></value>
+    <value name="TEXT"><shadow type="text"></shadow></value>
   </block>
   <block type="text_reverse">
-    <value name="TEXT">
-      <shadow type="text"></shadow>
-    </value>
+    <value name="TEXT"><shadow type="text"></shadow></value>
   </block>
   <label text="Input/Output:" web-class="ioLabel"></label>
   <block type="text_print">
-    <value name="TEXT">
-      <shadow type="text">
-        <field name="TEXT">abc</field>
-      </shadow>
-    </value>
+    <value name="TEXT"><shadow type="text"><field name="TEXT">abc</field></shadow></value>
   </block>
   <block type="text_prompt_ext">
-    <value name="TEXT">
-      <shadow type="text">
-        <field name="TEXT">abc</field>
-      </shadow>
-    </value>
+    <value name="TEXT"><shadow type="text"><field name="TEXT">abc</field></shadow></value>
   </block>
 </category>
 <category name="Lists" categorystyle="list_category">
@@ -268,48 +169,24 @@
   </block>
   <block type="lists_create_with"></block>
   <block type="lists_repeat">
-    <value name="NUM">
-      <shadow type="math_number">
-        <field name="NUM">5</field>
-      </shadow>
-    </value>
+    <value name="NUM"><shadow type="math_number"><field name="NUM">5</field></shadow></value>
   </block>
   <block type="lists_length"></block>
   <block type="lists_isEmpty"></block>
   <block type="lists_indexOf">
-    <value name="VALUE">
-      <block type="variables_get">
-        <field name="VAR">list</field>
-      </block>
-    </value>
+    <value name="VALUE"><block type="variables_get"><field name="VAR">list</field></block></value>
   </block>
   <block type="lists_getIndex">
-    <value name="VALUE">
-      <block type="variables_get">
-        <field name="VAR">list</field>
-      </block>
-    </value>
+    <value name="VALUE"><block type="variables_get"><field name="VAR">list</field></block></value>
   </block>
   <block type="lists_setIndex">
-    <value name="LIST">
-      <block type="variables_get">
-        <field name="VAR">list</field>
-      </block>
-    </value>
+    <value name="LIST"><block type="variables_get"><field name="VAR">list</field></block></value>
   </block>
   <block type="lists_getSublist">
-    <value name="LIST">
-      <block type="variables_get">
-        <field name="VAR">list</field>
-      </block>
-    </value>
+    <value name="LIST"><block type="variables_get"><field name="VAR">list</field></block></value>
   </block>
   <block type="lists_split">
-    <value name="DELIM">
-      <shadow type="text">
-        <field name="TEXT">,</field>
-      </shadow>
-    </value>
+    <value name="DELIM"><shadow type="text"><field name="TEXT">,</field></shadow></value>
   </block>
   <block type="lists_sort"></block>
   <block type="lists_reverse"></block>
@@ -318,38 +195,14 @@
   <block type="colour_picker"></block>
   <block type="colour_random"></block>
   <block type="colour_rgb">
-    <value name="RED">
-      <shadow type="math_number">
-        <field name="NUM">100</field>
-      </shadow>
-    </value>
-    <value name="GREEN">
-      <shadow type="math_number">
-        <field name="NUM">50</field>
-      </shadow>
-    </value>
-    <value name="BLUE">
-      <shadow type="math_number">
-        <field name="NUM">0</field>
-      </shadow>
-    </value>
+    <value name="RED"><shadow type="math_number"><field name="NUM">100</field></shadow></value>
+    <value name="GREEN"><shadow type="math_number"><field name="NUM">50</field></shadow></value>
+    <value name="BLUE"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
   </block>
   <block type="colour_blend">
-    <value name="COLOUR1">
-      <shadow type="colour_picker">
-        <field name="COLOUR">#ff0000</field>
-      </shadow>
-    </value>
-    <value name="COLOUR2">
-      <shadow type="colour_picker">
-        <field name="COLOUR">#3333ff</field>
-      </shadow>
-    </value>
-    <value name="RATIO">
-      <shadow type="math_number">
-        <field name="NUM">0.5</field>
-      </shadow>
-    </value>
+    <value name="COLOUR1"><shadow type="colour_picker"><field name="COLOUR">#ff0000</field></shadow></value>
+    <value name="COLOUR2"><shadow type="colour_picker"><field name="COLOUR">#3333ff</field></shadow></value>
+    <value name="RATIO"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value>
   </block>
 </category>
 <sep></sep>
@@ -359,7 +212,6 @@
 custom="PROCEDURE"></category>
             <sep></sep>
       <category name="Custom" colour="255">
-
         <block type="text"></block>
         <block type="text_print"></block>
         <block type="js_raw"></block>
@@ -369,17 +221,14 @@ custom="PROCEDURE"></category>
         <block type="js_elm_inner"></block>
       </category>
     </xml>
-
   </div>
-    
-    <script>
-    var w = 0.99;
 
+  <script>
+  var w = 0.99;
 
 var blocklyArea = document.getElementById('blocklyArea');
   var blocklyDiv = document.getElementById('blocklyDiv');
-  var workspace = Blockly.inject(blocklyDiv,
-      {toolbox: document.getElementById('toolbox')});
+  var workspace = Blockly.inject(blocklyDiv, {toolbox: document.getElementById('toolbox')});
   var onresize = function(e) {
     // Compute the absolute coordinates and dimensions of blocklyArea.
     var element = blocklyArea;
@@ -411,20 +260,16 @@ var blocklyArea = document.getElementById('blocklyArea');
   var ta = document.getElementById('textarea');
   document.getElementById('textarea').innerHTML = "";
   for (var i =0; i < spli.length; i++) {
-    if (spli[i].length > 0) {
+    if (spli[i].length > 0)
         document.getElementById('textarea').innerHTML += spli[i].replaceAll('[;]', ';<br>') + "<br>";
-    }
   }
-  
+
   var demo = "<br>// Auto-generated helper function.<br>" + 
             "function helper_createElement(type, id) {<br>" +
              "&nbsp;&nbsp;&nbsp&nbsp;var btn = document.createElement(type);<br>" + 
              "&nbsp;&nbsp;&nbsp;&nbsp;btn.setAttribute('id', id);<br>" + 
-             "&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('output').appendChild(btn);<br>" + 
-             "}";
-  if (ta.innerHTML.toString().includes("helper_createElement") && !(ta.innerHTML.toString().includes("function helper_createElement"))) {
-    ta.innerHTML += demo;
-  }
+             "&nbsp;&nbsp;&nbsp;&nbsp;document.body.appendChild(btn);<br>}";
+  if (ta.innerHTML.toString().includes("helper_createElement") && !(ta.innerHTML.toString().includes("function helper_createElement"))){ ta.innerHTML += demo; }
   
   try {
       var py = Blockly.Python.workspaceToCode(workspace);
@@ -450,39 +295,44 @@ var blocklyArea = document.getElementById('blocklyArea');
 }
 workspace.addChangeListener(myUpdateFunction);
 
-function runC() {
-    removeAllChildNodes(document.getElementById('output'));
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
-    eval(code);
-}
+var helper_createElm = " function helper_createElement(type, id){ var btn = document.createElement(type); btn.setAttribute('id', id);document.getElementById('output').appendChild(btn);} ";
 
-function runI() {
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
-    var myInterpreter = new Interpreter(code);
-    myInterpreter.run();
+var code;
+function runC() {
+   removeAllChildNodes(document.getElementById('output'));
+   code = Blockly.JavaScript.workspaceToCode(workspace) + helper_createElm;
+
+   var text = decodeURIComponent("%3Chtml%3E%3Cdiv%20id%3D'output'%3E%3C%2Fdiv%3E%3Cscript%3Eeval(parent.code);%3C%2Fscript%3E%3C%2Fhtml%3E");
+   text = text.replace("CODE_HERE", encodeURIComponent(code));
+
+   var ifr = document.createElement("iframe");
+   ifr.setAttribute("frameborder", "0");  
+   ifr.setAttribute("allowfullscreen", "true");  
+   ifr.className = "outputFrame";
+   var myb = document.getElementById("output");
+
+   myb.innerHTML = "";
+   myb.appendChild(ifr);
+   var ifrw = (ifr.contentWindow) ? ifr.contentWindow : (ifr.contentDocument.document) ? ifr.contentDocument.document : ifr.contentDocument;
+   ifrw.document.open();
+   ifrw.document.write(text);  
+   ifrw.document.close();
 }
 
 function openCity(evt, cityName) {
   var i, x, tablinks;
   x = document.getElementsByClassName("city");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
+  for (i = 0; i < x.length; i++){ x[i].style.display="none"; }
   tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-gblack", "");
-  }
+  for (i = 0; i < x.length; i++){ tablinks[i].className = tablinks[i].className.replace(" w3-gblack", "");}
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.className += " w3-gblack";
 }
 
 function downloadP(name) {
-    var xmlText = Blockly.Xml.domToPrettyText( Blockly.Xml.workspaceToDom(workspace) );
-    download(name + ".xml", "<!-- Copyright (C) 2021 -->\n" + xmlText);
+  download(name + ".xml", Blockly.Xml.domToPrettyText( Blockly.Xml.workspaceToDom(workspace)) );
 }
-
 var pId;
-
 function saveB() {
   if (undefined == pId){ saveBlocks(); return; }
   var xmlText = Blockly.Xml.domToPrettyText( Blockly.Xml.workspaceToDom(workspace) );  
@@ -508,8 +358,7 @@ if (queryString.indexOf("projectId") != -1) {
     console.log(pId);
 }
 
-
-function loadBlock(xml) { // xml is the same block xml you stored
+function loadBlock(xml) {
   if (typeof xml != "string" || xml.length < 5) return false;
   try {
     var dom = Blockly.Xml.textToDom(xml);
@@ -528,26 +377,22 @@ function download(filename, text) {
   element.click();
   document.body.removeChild(element);
 }
-
 document.getElementById('files').addEventListener('change', getFile);
 
-
 function getFile(event) {
-	const input = event.target
+  const input = event.target;
   if ('files' in input && input.files.length > 0) {
-	  placeFileContent(document.getElementById('content-target'),
-      input.files[0])
+	placeFileContent(document.getElementById('content-target'),
+    input.files[0])
   }
 }
 
 function placeFileContent(target, file) {
-	readFileContent(file).then(content => {
-        loadBlock(content);
-    }).catch(error => console.log(error))
+	readFileContent(file).then(content =>{loadBlock(content);}).catch(error => console.log(error))
 }
 
 function readFileContent(file) {
-	const reader = new FileReader()
+  const reader = new FileReader()
   return new Promise((resolve, reject) => {
     reader.onload = event => resolve(event.target.result)
     reader.onerror = error => reject(error)
@@ -556,15 +401,7 @@ function readFileContent(file) {
 }
 
 function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
-
-function helper_createElement(type, id) {
-   var btn = document.createElement(type);
-   btn.setAttribute("id", id);
-   document.getElementById('output').appendChild(btn);
+    while (parent.firstChild) parent.removeChild(parent.firstChild);
 }
 </script>
 </html>
