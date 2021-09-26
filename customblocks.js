@@ -73,7 +73,6 @@ Blockly.Blocks['js_2'] = {
     this.appendValueInput('VAL1')
       .appendField('getElementById(');
     this.appendValueInput('VAL2')
-      //.appendField(new Blockly.FieldTextInput("myid"),"TEXT")
       .appendField(').innerHTML =');
     this.setInputsInline(true);
     this.setPreviousStatement(!0);
@@ -88,3 +87,62 @@ Blockly.JavaScript['js_2'] = function(block) {
   var argument1 = Blockly.JavaScript.valueToCode(block, 'VAL2', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
   return 'document.getElementById(' + argument0 + ').innerHTML = ' + argument1 + ";";
 };
+
+
+Blockly.Blocks['js_elm_x'] = {
+  init: function() {
+    this.appendValueInput('VALUE')
+      .appendField('getElementById(')
+    this.appendDummyInput('TXT')
+      .appendField(').getBoundingClientRect().x');
+    this.setInputsInline(true);
+    this.setOutput(true, 'Number');
+    this.setColour(160);
+    this.setTooltip('Get the X position of the element');
+  }
+};
+
+Blockly.JavaScript['js_elm_x'] = function(block) {
+  var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  return ['document.getElementById(' + argument0 + ').getBoundingClientRect().x', -2];
+};
+
+Blockly.Blocks['js_elm_y'] = {
+  init: function() {
+    this.appendValueInput('VALUE')
+      .appendField('getElementById(')
+    this.appendDummyInput('TXT')
+      .appendField(').getBoundingClientRect().x');
+    this.setInputsInline(true);
+    this.setOutput(true, 'Number');
+    this.setColour(160);
+    this.setTooltip('Get the Y position of the element');
+  }
+};
+
+Blockly.JavaScript['js_elm_y'] = function(block) {
+  var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  return ['document.getElementById(' + argument0 + ').getBoundingClientRect().y', -2];
+};
+
+
+Blockly.Blocks['js_onclick'] = {
+  init: function() {
+    this.appendValueInput('VAL1')
+      .appendField('getElementById(');
+    this.appendValueInput('VAL2')
+      .appendField(').onClick =');
+    this.setInputsInline(true);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setOutput(0, 'Dummy');
+    this.setColour(160);
+    this.setTooltip('Set the content of an element');
+  }
+};
+Blockly.JavaScript['js_onclick'] = function(block) {
+  var argument0 = Blockly.JavaScript.valueToCode(block, 'VAL1', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  var argument1 = Blockly.JavaScript.valueToCode(block, 'VAL2', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  return 'document.getElementById(' + argument0 + ').onclick = function() {' + argument1.replaceAll("'", "") + '}' + ";";
+};
+

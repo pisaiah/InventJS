@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>InventJS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
+    <script src="./main.js"></script>
+    <style>
+    .title {font-family: "Lucida Console", "Courier New", monospace;}
+    .w3-bar .w3-right {padding-right:2rem;align:middle;}
+    #projects a {margin:4px;}
+    
+td, th { border: 1px solid #dddddd;text-align: left;padding: 2px;min-width: 8rem;}
+    * {scrollbar-color: rgb(40,100,40) #508F24;}
+    
+    h2 {background:black;color:white;max-width:50%;margin-top:1rem !important;padding:.1rem;padding-left:1rem;}
+    h3 {background:black;color:white;max-width:50%;margin-top:8rem !important;padding:.1rem;padding-left:1rem;margin-bottom: 0 !important;}
+    .mc {border: 1px solid black;padding:1rem !important;}
+    </style>
+  </head>
+  <body style="background-color:#EBF7E3;">
+  
+  <div class="w3-bar w3-xlarge" style="background-color:#508F24;color:white;font-style:bold;">
+    <a href="./index.html" class="w3-bar-item w3-button"><button>Back</button></a>
+    <span class="w3-bar-item title" style="font-sizre:2rem;">InventJS&trade; Examples &amp; Documentation</span>
+    <div class="w3-right">
+        <a href="#" class="w3-bar-item">
+            <img src="https://developers.google.com/blockly/images/logos/logo_built_on_dark_with_bg.png" width="92">
+        </a>
+    </div>
+  </div>
+  <div class="w3-container w3-padding-small w3-theme-d3" style="max-height:1rem;">&nbsp;</div>
+  
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <script src="https://unpkg.com/blockly@6.20210701.0/javascript_compressed.js"></script>
+    <script src="https://unpkg.com/blockly@6.20210701.0/python_compressed.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="w3-content" style="padding-top:1rem;background:#EBF7E3;">
+      <div id="#about">
+        <h2>InventJS</h2>
+        <table>
+  <tr>
+    <th>Product</th><th>Version</th>
+  </tr>
+  <tr><td>InventJS</td><td><span id="version">${version}</span> by Isaiah</td></tr>
+  <tr><td>Blockly</td><td>6.20210701.0 + Javascript Generator</td></tr>
+  <tr><td>W3.CSS</td><td>4.15 (December 2020) by Jan Egil and Borge Refsnes</td></tr>
+</table>
+      </div>
+      
+      <div id="#export">
+        <h2>Exporting Project</h2>
+        <p>InventJS&trade; allows exporting projects as full webpages!<br><br>
+        <img src="./assets/ex-export.png" width="200">&nbsp;&nbsp;&nbsp;<img src="./assets/ex-dl.png" width="100" style="border-radius:8px;">
+        </p>
+      </div>
+      
+      <div id="#ui">
+        <h2>JS UI</h2>
+        <p>The "JS UI" block category contains custom blocks allowing with interaction with the HTML DOM.</p>
+        <p>Examples:
+            <ul>
+              <li><a href="#ui-create-el">Create Element</a></li>
+              <li><a href="#ui-change-content">Changing the Content of an Element</a></li>
+              <li><a href="#ui-clickevent">Element onClick Event</a></li>
+            </ul>
+        </p>
+        
+        <div class="w3-container">
+
+            <h3 style="margin-top:2rem !important;" id="ui-create-el">Creating an Element</h3>
+            <div class="w3-container mc">
+                InventJS provides an helper function in JS to take care of creation of Elements:
+                <img src="./assets/helper-createEl.png">
+
+                <h4>Create a Button with ID</h4>
+                <div class="w3-container">
+                    <img src="./assets/ex-createButton.png">
+                </div>
+            </div>
+
+            <h3 id="ui-change-content">Changing the Content of an Element</h3>
+            <div class="w3-container mc">
+                You might have noticed in the last section, the button we created was empty. This is because we have not
+                set the <code>innerHTML</code>, or content, of the Element.
+
+                <h4>Set the content of an Element</h4>
+                <div class="w3-container">
+                    <img src="./assets/ex-setContent.png"><br>
+                    In the above blocks, we set the <code>innerHTML</code> of the element with id of <code>myid</code>, the button we created earlier, to <code>Hello</code>
+                </div>
+            </div>
+
+            <h3 id="ui-clickevent">Element onClick Event</h3>
+            <div class="w3-container mc">
+                A Button is just not very useful without being clickable.
+                
+                <h4>First create a new function</h4>
+                <div class="w3-container">
+                    <img src="./assets/ex-function.png">
+                </div>
+
+                <h4>Set the <code>onClickEvent</code> Element</h4>
+                <div class="w3-container">
+                    <img src="./assets/ex-clickEvent.png"><br>
+                    In the above blocks, we set the <code>onClick</code> event of the element with id of <code>myid</code> to <code>myFunction();</code>
+                </div>
+                
+                <h4>Now Run</h4>
+                <div class="w3-container">
+                    <img src="./assets/ex-alert.png" style="border-radius:1rem;" width="300"><br>
+                    Success!
+                </div>
+                
+                <h4>onClick and functions with arguments </h4>
+                <div class="w3-container">
+                    onClick uses the generated JS name of the function.<br>
+                    A function with the name of <code>myFunction</code>:
+                    <div class="w3-container">
+                        - No inputs would be <code>myFunction();</code><br>
+                        - The input of <code>x</code> would be <code>myFunction(x);</code><br>
+                        - The inputs of <code>x &amp; y</code> would be <code>myFunction(x, y);</code><br>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+  </div>
+  <br><p>&nbsp;</p><br>
+  <div class="w3-bar w3-theme" style="width:100%;background-color:#508F24 !important;padding:2rem;padding-top:4rem;">
+    <p class="w3-center" style="padding-left:1rem;">InventJS&trade;<br>Copyright &copy; 2021 by Isaiah.</p>
+  </div>
+  </body>
+  
+  <script>document.getElementById("version").innerHTML = projectVersion;</script>
+</html>

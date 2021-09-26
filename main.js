@@ -1,4 +1,7 @@
- var w = 0.99;
+const projectVersion = "1.0-indev (Sept 25th, 2021)";
+var w = 0.99;
+
+if (undefined != Blockly) {
 
 var blocklyArea = document.getElementById('blocklyArea');
   var blocklyDiv = document.getElementById('blocklyDiv');
@@ -171,4 +174,6 @@ function readFileContent(file) {
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) parent.removeChild(parent.firstChild);
+}
+
 }
