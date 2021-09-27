@@ -11,6 +11,7 @@
     .w3-bar .w3-right {padding-right:2rem;align:middle;}
     .w3-bar a {text-decoration:none; vertical-align:middle;}
     #projects a {margin:4px;}
+    .w3-button {border:1.4px solid #508F24;border-radius:.4rem;}
     </style>
   </head>
   <body style="background-color:#EBF7E3;">
@@ -25,7 +26,7 @@
         </a>
         <a href="#" class="w3-bar-item">
             <img class="w3-hide-small" src="https://developers.google.com/blockly/images/logos/logo_built_on_dark_with_bg.png" width="180">
-            <img class="w3-hide-medium w3-hide-large" src="https://developers.google.com/blockly/images/logos/logo_built_on_dark_with_bg.png" width="120">
+            <img class="w3-hide-medium w3-hide-large" src="https://developers.google.com/blockly/images/logos/logo_built_on_dark_with_bg.png" width="90">
         </a>
     </div>
   </div>
@@ -45,11 +46,11 @@
             <div>
                 <a href="./workspace.html?createNewProject"><button class="w3-theme w3-button">New Project</button></a>
                 <a href="./examples.html"><button class="w3-theme w3-button">Examples &amp; Documentation</button></a>
+                <br>
             </div>
         </div>
       </div>
       <div class="w3-rest w3-mobile" style="padding-left:1rem;padding-top:1rem;">
-       
         <h3>My Projects <i><small style="font-size:.8rem;">(From browser's localStorage)</small></i></h3>
         <div id="projects">
           <div id="test"></div>
@@ -66,7 +67,7 @@ for (var i = 0; i < localStorage.length; i++) {
   var key = localStorage.key(i);
   var value = localStorage.getItem(key);
   console.log('Key: ' + key + ', Value: ' + value);
-  
+
   if (value.toString().indexOf('<xml xmlns="https://developers.google.com/blockly/xml">') == -1) {
     continue; // Not a Saved Project.
   }

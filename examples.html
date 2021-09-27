@@ -18,6 +18,7 @@ td, th { border: 1px solid #dddddd;text-align: left;padding: 2px;min-width: 8rem
     h2 {background:black;color:white;max-width:50%;margin-top:1rem !important;padding:.1rem;padding-left:1rem;}
     h3 {background:black;color:white;max-width:50%;margin-top:8rem !important;padding:.1rem;padding-left:1rem;margin-bottom: 0 !important;}
     .mc {border: 1px solid black;padding:1rem !important;}
+    img {max-width:80vw;}
     </style>
   </head>
   <body style="background-color:#EBF7E3;">
@@ -40,7 +41,7 @@ td, th { border: 1px solid #dddddd;text-align: left;padding: 2px;min-width: 8rem
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <div class="w3-content" style="padding-top:1rem;background:#EBF7E3;">
-      <div id="#about">
+      <!--<div id="#about">
         <h2>InventJS</h2>
         <table>
   <tr>
@@ -50,13 +51,15 @@ td, th { border: 1px solid #dddddd;text-align: left;padding: 2px;min-width: 8rem
   <tr><td>Blockly</td><td>6.20210701.0 + Javascript Generator</td></tr>
   <tr><td>W3.CSS</td><td>4.15 (December 2020) by Jan Egil and Borge Refsnes</td></tr>
 </table>
-      </div>
+      </div>-->
       
       <div id="#export">
         <h2>Exporting Project</h2>
-        <p>InventJS&trade; allows exporting projects as full webpages!<br><br>
-        <img src="./assets/ex-export.png" width="200">&nbsp;&nbsp;&nbsp;<img src="./assets/ex-dl.png" width="100" style="border-radius:8px;">
-        </p>
+        <b>As HTML Webpage:</b><div class="w3-container">InventJS&trade; allows exporting projects as full webpages!<br>
+        <img src="./assets/ex-export.png" width="160">&nbsp;&nbsp;&nbsp;<img src="./assets/ex-dl.PNG" width="80" style="border-radius:8px;"><br>
+        </div>
+        <b>As Android App:</b><div class="w3-container">&nbsp;Sites like <a rel="nofollow" target="_blank" href="https://appsgeyser.com/create-html-app/">AppsGeyser</a> provide ways to package the HTML file into an APK (Android)
+        <img src="./assets/Capture.PNG" width="100" style="float:left;"></div>
       </div>
       
       <div id="#ui">
@@ -69,7 +72,6 @@ td, th { border: 1px solid #dddddd;text-align: left;padding: 2px;min-width: 8rem
               <li><a href="#ui-clickevent">Element onClick Event</a></li>
             </ul>
         </p>
-        
         <div class="w3-container">
 
             <h3 style="margin-top:2rem !important;" id="ui-create-el">Creating an Element</h3>
@@ -126,6 +128,11 @@ td, th { border: 1px solid #dddddd;text-align: left;padding: 2px;min-width: 8rem
                         - The inputs of <code>x &amp; y</code> would be <code>myFunction(x, y);</code><br>
                     </div>
                 </div>
+            </div>
+            
+            <h3 id="ui-pos">Changing the Position of an Element (x,y)</h3>
+            <div class="w3-container mc">
+                Todo: Write this section of docs.
             </div>
 
         </div>
