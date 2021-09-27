@@ -23,32 +23,29 @@
     </style>
 
   <div class="w3-bar w3-light-grey">
-    <a class="w3-bar-item w3-button w3-black titl">InventJS&trade;</a>
+    <a class="w3-bar-item w3-button w3-black titl"><span class="w3-hide-small w3-hide-medium">InventJS&trade;</span><span class="w3-hide-large">Invent<sub>JS</sub></span></a>
     <a href="#" class="w3-bar-item w3-button" onclick="saveB()"><span class="btn">Save</span></a>
     <a href="#" class="w3-bar-item w3-button" onclick="saveBlocks()"><span class="btn">Save As..</span></a>
     <div class="w3-dropdown-hover">
-      <button class="w3-button"><span class="btn">Download <i class="fa fa-caret-down"></i></span></button>
+      <button class="w3-button"><span class="btn"><i class="fa fa-download w3-hide-large"></i> <span class="w3-hide-medium w3-hide-small">Download</span> <i class="fa fa-caret-down"></i></span></button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
         <a href="#" onclick="downloadP('test')" class="w3-bar-item w3-button"><span class="btn">Download Blocks...</span></a>
         <a href="#" class="w3-bar-item w3-button"><input type="file" id="files" style="display:none;"/><label for="files" class="btn">Load from Download</label></a>
         <a href="#" onclick="packageHTML()" class="w3-bar-item w3-button"><span class="btn">Download as Runnable Webpage</span></a>
       </div>
     </div>
-    <a href="#" class="w3-bar-item w3-button"><span onclick="runC()">Run Project <i class="fa fa-play" style="color:green"></i></span></a>
+    <a href="#" class="w3-bar-item w3-button"><span onclick="runC()">Run<span class="w3-hide-small"> Project</span> <i class="fa fa-play" style="color:green"></i></span></a>
   </div>
 
-  <div class="w3-container" style="padding-top:.5rem">
-    <div class="w3-half sc" id="blocklyArea" style="float:left;width:55vw; height:88vh;">
+  <div class="w3-container" style="padding-top:.5rem;padding-left:.8rem;">
+    <div class="w3-row">
+    <div class="sc w3-mobile" id="blocklyArea" style="width:56%;float:left;widtah:55vw;height:88vh;">
         <div id="blocklyDiv" class="sc1 bord"></div>
     </div>
 
-    <div style="position:absolute;bottom:4px;left:1rem;" class="w3-container w3-light-gray">
-      InventJS&trade; version 1.1 &copy; 2021 by Isaiah. <a target="_blank" href="https://developers.google.com/blockly">Blocky API</a> by Google
-    </div>
-
-    <div class="" style="width:40vw;display:inline-block;padding-left:.7rem;margin-top:-3rem;">
+    <div class="w3-mobile" style="width:44%;wiadth:41vw;display:inline-block;padding-left:.2rem;margin-top:-3rem;">
       <div class="w3-bar w3-blak" style="margin:0;padding:0;">
-        <span class="w3-bar-item">Code Output: </span>
+        <span class="w3-bar-item w3-hide-small w3-hide-medium">Code Output: </span>
         <button class="w3-bar-item w3-button tablink w3-gblack" onclick="openCity(event,'djs')">JS</button>
         <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'dpy')">Python</button>
       </div>
@@ -57,7 +54,12 @@
       <div class="title" style="margin:2px;">Output: </div>
       <div id="output" class="bord bbg" style="height:44vh;padding:8px;"></div>
     </div>
-    
+    </div>
+    <div style="position:absolute;bottom:4px;left:1rem;" class="w3-container w3-light-gray w3-hide-small w3-hide-medium">
+      InventJS&trade; &copy; 2021 by Isaiah. <a target="_blank" href="https://developers.google.com/blockly">Blocky API</a> by Google
+    </div>
+
+
     <xml id="toolbox" style="display: none">
         <category name="Logic" categorystyle="logic_category">
   <block type="controls_if"></block>
