@@ -112,7 +112,7 @@ Blockly.Blocks['js_elm_y'] = {
     this.appendValueInput('VALUE')
       .appendField('getElementById(')
     this.appendDummyInput('TXT')
-      .appendField(').getBoundingClientRect().x');
+      .appendField(').getBoundingClientRect().y');
     this.setInputsInline(true);
     this.setOutput(true, 'Number');
     this.setColour(160);

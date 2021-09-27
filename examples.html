@@ -130,9 +130,24 @@ td, th { border: 1px solid #dddddd;text-align: left;padding: 2px;min-width: 8rem
                 </div>
             </div>
             
-            <h3 id="ui-pos">Changing the Position of an Element (x,y)</h3>
+            <h3 id="ui-pos">Get/Change the Position of an Element</h3>
             <div class="w3-container mc">
-                Todo: Write this section of docs.
+                <h4>Get Position</h4>
+                <div class="w3-container">
+                    Blocks that return the x &amp; y values from <code>getBoundingClientRect</code> are provided.
+                    <img src="./assets/ex-bxy.png" height="70">
+                </div><br>
+                
+                <h4>Set Position</h4>
+                <div class="w3-container">
+                    By default HTML elements have the position value of <code>static</code>; For us to set the coordinates of the element,<br>
+                    we have to set the position style to <code>absolute</code>.
+                    <img src="./assets/ex-abs.png" height="36"><br><br>
+                    Now we can set the top (y) and left (x) positions of the element.<br>
+                    <img src="./assets/ex-pos.png" height="90"><br>
+                    <i>Note:</i> The value is in CSS units, so <code>px</code> or <code>rem</code> needs to be appended to the end.<br>
+                    <code>px</code> stands for pixels, but are resolution <b>independent</b>.
+                </div>
             </div>
 
         </div>
