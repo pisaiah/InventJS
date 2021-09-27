@@ -163,9 +163,13 @@ Blockly.Blocks['js_top'] = {
 Blockly.JavaScript['js_top'] = function(block) {
   var arg0 = Blockly.JavaScript.valueToCode(block, 'VAL1', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
   var arg1 = Blockly.JavaScript.valueToCode(block, 'VAL2', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  if (arg1.indexOf('px') == -1 && arg1.indexOf('em') == -1){ 
+    if (arg1.indexOf("'") != -1) {
+        arg1 = "'" + arg1.replaceAll("'","") + "px'";
+    } else arg1 = "(" + arg1.replaceAll("'","") + ") + 'px'";   
+  }
   return 'document.getElementById(' + arg0 + ').style.top = ' + arg1 + ";";
 };
-
 Blockly.Blocks['js_left'] = {
   init: function() {
     this.appendValueInput('VAL1')
@@ -183,7 +187,11 @@ Blockly.Blocks['js_left'] = {
 Blockly.JavaScript['js_left'] = function(block) {
   var arg0 = Blockly.JavaScript.valueToCode(block, 'VAL1', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
   var arg1 = Blockly.JavaScript.valueToCode(block, 'VAL2', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-  if (arg1.indexOf('px') == -1 && arg1.indexOf('em') == -1){ arg1 = "'" + arg1.replaceAll("'","") + "px'"; }
+  if (arg1.indexOf('px') == -1 && arg1.indexOf('em') == -1){ 
+    if (arg1.indexOf("'") != -1) {
+        arg1 = "'" + arg1.replaceAll("'","") + "px'";
+    } else arg1 = "(" + arg1.replaceAll("'","") + ") + 'px'";   
+  }
   return 'document.getElementById(' + arg0 + ').style.left = ' + arg1 + ";";
 };
 
