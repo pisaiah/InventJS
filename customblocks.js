@@ -127,16 +127,13 @@ Blockly.JavaScript['js_elm_y'] = function(block) {
 
 Blockly.Blocks['js_onclick'] = {
   init: function() {
-    this.appendValueInput('VAL1')
-      .appendField('getElementById(');
-    this.appendValueInput('VAL2')
-      .appendField(').onClick =');
+    this.appendValueInput('VAL1').appendField('getElementById(');
+    this.appendValueInput('VAL2').appendField(').onClick =');
     this.setInputsInline(true);
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setOutput(0, 'Dummy');
     this.setColour(160);
-    this.setTooltip('Set the content of an element');
   }
 };
 Blockly.JavaScript['js_onclick'] = function(block) {
@@ -157,7 +154,7 @@ Blockly.Blocks['js_top'] = {
     this.setNextStatement(!0);
     this.setOutput(0, 'Dummy');
     this.setColour(160);
-    this.setTooltip('Set the content of an element');
+    this.setTooltip('Set the y position');
   }
 };
 Blockly.JavaScript['js_top'] = function(block) {
@@ -181,7 +178,7 @@ Blockly.Blocks['js_left'] = {
     this.setNextStatement(!0);
     this.setOutput(0, 'Dummy');
     this.setColour(160);
-    this.setTooltip('Set the content of an element');
+    this.setTooltip('Set the x position');
   }
 };
 Blockly.JavaScript['js_left'] = function(block) {
@@ -206,7 +203,7 @@ Blockly.Blocks['js_bg'] = {
     this.setNextStatement(!0);
     this.setOutput(0, 'Dummy');
     this.setColour(160);
-    this.setTooltip('Set the content of an element');
+    this.setTooltip('Set the background CSS');
   }
 };
 Blockly.JavaScript['js_bg'] = function(block) {
@@ -224,13 +221,31 @@ Blockly.Blocks['js_keydown'] = {
     this.setNextStatement(!0);
     this.setOutput(0, 'Dummy');
     this.setColour(160);
-    this.setTooltip('Set the content of an element');
+    this.setTooltip('Key is pressed on the keyboard');
   }
 };
 Blockly.JavaScript['js_keydown'] = function(block) {
   var arg0 = Blockly.JavaScript.valueToCode(block, 'VAL1', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
   var arg1 = Blockly.JavaScript.valueToCode(block, 'VAL2', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-  return "document.addEventListener('keydown', " + arg1 + ");";
+  return "document.addEventListener('keydown', " + arg1.replaceAll("'","") + ");";
+};
+
+Blockly.Blocks['js_keyup'] = {
+  init: function() {
+    this.appendValueInput('VAL2')
+      .appendField('addEventListener keyup');
+    this.setInputsInline(false);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setOutput(0, 'Dummy');
+    this.setColour(160);
+    this.setTooltip('After key is released');
+  }
+};
+Blockly.JavaScript['js_keyup'] = function(block) {
+  var arg0 = Blockly.JavaScript.valueToCode(block, 'VAL1', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  var arg1 = Blockly.JavaScript.valueToCode(block, 'VAL2', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  return "document.addEventListener('keyup', " + arg1.replaceAll("'","") + ");";
 };
 
 Blockly.Blocks['js_display'] = {
@@ -262,7 +277,7 @@ Blockly.Blocks['js_pos'] = {
     var input = this.appendValueInput('VAL1')
           .appendField('getElementById(');
       this.appendDummyInput('VAL1')
-        .appendField(').style.display = ').appendField(new Blockly.FieldDropdown(this.generateOptions), 'VAL2');
+        .appendField(').style.position = ').appendField(new Blockly.FieldDropdown(this.generateOptions), 'VAL2');
         this.setPreviousStatement(!0);
         this.setNextStatement(!0);
         this.setOutput(0, 'Dummy');
@@ -279,4 +294,20 @@ Blockly.JavaScript['js_pos'] = function(block) {
   var arg0 = Blockly.JavaScript.valueToCode(block, 'VAL1', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
   var arg1 = block.getFieldValue('VAL2');
   return "document.getElementById(" + arg0 + ").style.position = '" + arg1 + "';";
+};
+
+Blockly.Blocks['js_keychar'] = {
+  init: function() {
+    this.appendValueInput('VALUE')
+      .appendField('Get key from event')
+    this.setInputsInline(false);
+    this.setOutput(true, 'Number');
+    this.setColour(160);
+    this.setTooltip('Get the String value from the KeyboardEvent');
+  }
+};
+
+Blockly.JavaScript['js_keychar'] = function(block) {
+  var arg0 = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  return [arg0.replace("'","") + '.key', -2];
 };

@@ -45,7 +45,7 @@ var blocklyArea = document.getElementById('blocklyArea');
              "&nbsp;&nbsp;&nbsp;&nbsp;document.body.appendChild(btn);<br>}";
   if (ta.innerHTML.toString().includes("helper_createElement") && !(ta.innerHTML.toString().includes("function helper_createElement"))){ ta.innerHTML += demo; }
   
-  try {
+  /*try {
       var py = Blockly.Python.workspaceToCode(workspace);
       var spli = py.replaceAll("  ","&nbsp;&nbsp;&nbsp;").split("\n");
       document.getElementById('textpy').innerHTML = "";
@@ -54,7 +54,7 @@ var blocklyArea = document.getElementById('blocklyArea');
     if (error.toString().indexOf('does not know how to generate code for block type "js_') != -1)
         error = '<b>Error:</b><br>Language "Python" does not know how to generate code for <b>JS-only blocks.</b>';
     document.getElementById('textpy').innerHTML = error;
-  } 
+  } */
   w3CodeColor();
 }
 workspace.addChangeListener(myUpdateFunction);

@@ -1,49 +1,23 @@
-/* w3codecolor ver 1.32 by w3schools.com */
+// w3codecolor ver 1.32 by w3schools
 function w3CodeColor() {
-  var x, i, j, k, l, modes = ["html", "js", "java", "css", "python"];
-  if (!document.getElementsByClassName) {return;}
-  k = modes.length;
-  for (j = 0; j < k; j++) {
-    x = document.getElementsByClassName(modes[j] + "High");
-    l = x.length;
-    for (i = 0; i < l; i++) {
-      x[i].innerHTML = w3CodeColorize(x[i].innerHTML, modes[j]);
-    }
+  var x,i,j, modes = ["html","js","python"];
+  if (!document.getElementsByClassName) return;
+  for (j=0; j<modes.length; j++) {
+    x=document.getElementsByClassName(modes[j]+"High");
+    for (i=0; i<x.length; i++){ x[i].innerHTML = w3CodeColorize(x[i].innerHTML, modes[j]);}
   }
 }
 function w3CodeColorize(x, lang) {
-  var tagcolor = "mediumblue";
-  var tagnamecolor = "brown";
-  var attributecolor = "red";
-  var attributevaluecolor = "mediumblue";
-  var commentcolor = "green";
-  var cssselectorcolor = "brown";
-  var csspropertycolor = "red";
-  var csspropertyvaluecolor = "mediumblue";
-  var cssdelimitercolor = "black";
-  var cssimportantcolor = "red";  
-  var jscolor = "black";
-  var jskeywordcolor = "mediumblue";
-  var jsstringcolor = "brown";
-  var jsnumbercolor = "red";
-  var jspropertycolor = "black";
-  var javacolor = "black";
-  var javakeywordcolor = "mediumblue";
-  var javastringcolor = "brown";
-  var javanumbercolor = "red";
-  var javapropertycolor = "black";
-  var pythoncolor = "black";
-  var pythonkeywordcolor = "mediumblue";
-  var pythonstringcolor = "brown";
-  var pythonnumbercolor = "red";  
-  var angularstatementcolor = "red";
+  var tagcolor="mediumblue";var tagnamecolor="brown";
+  var attributecolor="red";var attributevaluecolor="mediumblue";var commentcolor = "green";
+  var jscolor="black";var jskeywordcolor="mediumblue";var jsstringcolor="brown";var jsnumbercolor="red";var jspropertycolor="black";
+  var pythoncolor="black";var pythonkeywordcolor="mediumblue";var pythonstringcolor="brown";var pythonnumbercolor="red";
+  var angularstatementcolor="red";
 
-  if (!lang) {lang = "html"; }
-  if (lang == "html") {return htmlMode(x);}
-  if (lang == "css") {return cssMode(x);}
-  if (lang == "js") {return jsMode(x);}
-  if (lang == "java") {return javaMode(x);}
-  if (lang == "python") {return pythonMode(x);}
+  if (!lang){lang="html";}
+  if (lang=="html"){return htmlMode(x);}
+  if (lang=="js"){return jsMode(x);}
+  if (lang=="python"){return pythonMode(x);}
   return x;
   function extract(str, start, end, func, repl) {
     var s, e, d = "", a = [];
@@ -70,51 +44,36 @@ function w3CodeColorize(x, lang) {
     while (rest.indexOf("&lt;") > -1) {
       note = "";
       startpos = rest.indexOf("&lt;");
-      if (rest.substr(startpos, 9).toUpperCase() == "&LT;STYLE") {note = "css";}
       if (rest.substr(startpos, 10).toUpperCase() == "&LT;SCRIPT") {note = "javascript";}        
       endpos = rest.indexOf("&gt;", startpos);
       if (endpos == -1) {endpos = rest.length;}
       done += rest.substring(0, startpos);
       done += tagMode(rest.substring(startpos, endpos + 4));
       rest = rest.substr(endpos + 4);
-      if (note == "css") {
-        endpos = rest.indexOf("&lt;/style&gt;");
-        if (endpos > -1) {
-          done += cssMode(rest.substring(0, endpos));
-          rest = rest.substr(endpos);
-        }
-      }
       if (note == "javascript") {
         endpos = rest.indexOf("&lt;/script&gt;");
-        if (endpos > -1) {
-          done += jsMode(rest.substring(0, endpos));
-          rest = rest.substr(endpos);
-        }
+        if (endpos > -1){ done += jsMode(rest.substring(0,endpos)); rest = rest.substr(endpos);}
       }
     }
     rest = done + rest;
     angular = new extract(rest, "{{", "}}", angularMode);
     rest = angular.rest;
-    for (i = 0; i < comment.arr.length; i++) {
-        rest = rest.replace("W3HTMLCOMMENTPOS", comment.arr[i]);
-    }
+    for (i = 0; i < comment.arr.length; i++){ rest = rest.replace("W3HTMLCOMMENTPOS", comment.arr[i]); }
     return rest;
   }
   function tagMode(txt) {
-    var rest = txt, done = "", startpos, endpos, result;
-    while (rest.search(/(\s|<br>)/) > -1) {    
+    var rest = txt, done = "", startpos,endpos,result;
+    while (rest.search(/(\s|<br>)/) > -1){
       startpos = rest.search(/(\s|<br>)/);
       endpos = rest.indexOf("&gt;");
-      if (endpos == -1) {endpos = rest.length;}
-      done += rest.substring(0, startpos);
-      done += attributeMode(rest.substring(startpos, endpos));
-      rest = rest.substr(endpos);
+      if (endpos == -1) {endpos=rest.length;}
+      done += rest.substring(0,startpos);
+      done += attributeMode(rest.substring(startpos,endpos));
+      rest=rest.substr(endpos);
     }
-    result = done + rest;
-    result = "<span class='tagcolor' style=color:" + tagcolor + ">&lt;</span>" + result.substring(4);
-    if (result.substr(result.length - 4, 4) == "&gt;") {
-      result = result.substring(0, result.length - 4) + "<span class='tagcolor' style=color:" + tagcolor + ">&gt;</span>";
-    }
+    result= done+rest;
+    result= "<span class='tagcolor' style=color:" + tagcolor + ">&lt;</span>" + result.substring(4);
+    if (result.substr(result.length-4,4)=="&gt;"){ result = result.substring(0,result.length-4) + "<span class='tagcolor' style=color:"+tagcolor+">&gt;</span>";}
     return "<span class='tagnamecolor' style=color:" + tagnamecolor + ">" + result + "</span>";
   }
   function attributeMode(txt) {
@@ -137,100 +96,14 @@ function w3CodeColorize(x, lang) {
       done += attributeValueMode(rest.substring(startpos, endpos + 1));
       rest = rest.substr(endpos + 1);
     }
-    return "<span class='attributecolor' style=color:" + attributecolor + ">" + done + rest + "</span>";
+    return "<span class='attributecolor' style=color:"+attributecolor+">" + done + rest + "</span>";
   }
-  function attributeValueMode(txt) {
-    return "<span class='attributevaluecolor' style=color:" + attributevaluecolor + ">" + txt + "</span>";
-  }
-  function angularMode(txt) {
-    return "<span class='angularstatementcolor' style=color:" + angularstatementcolor + ">" + txt + "</span>";
-  }
-  function commentMode(txt) {
-    return "<span class='commentcolor' style=color:" + commentcolor + ">" + txt + "</span>";
-  }
-  function cssMode(txt) {
-    var rest = txt, done = "", s, e, comment, i, midz, c, cc;
-    comment = new extract(rest, /\/\*/, "*/", commentMode, "W3CSSCOMMENTPOS");
-    rest = comment.rest;
-    while (rest.search("{") > -1) {
-      s = rest.search("{");
-      midz = rest.substr(s + 1);
-      cc = 1;
-      c = 0;
-      for (i = 0; i < midz.length; i++) {
-        if (midz.substr(i, 1) == "{") {cc++; c++}
-        if (midz.substr(i, 1) == "}") {cc--;}
-        if (cc == 0) {break;}
-      }
-      if (cc != 0) {c = 0;}
-      e = s;
-      for (i = 0; i <= c; i++) {
-        e = rest.indexOf("}", e + 1);
-      }
-      if (e == -1) {e = rest.length;}
-      done += rest.substring(0, s + 1);
-      done += cssPropertyMode(rest.substring(s + 1, e));
-      rest = rest.substr(e);
-    }
-    rest = done + rest;
-    rest = rest.replace(/{/g, "<span class='cssdelimitercolor' style=color:" + cssdelimitercolor + ">{</span>");
-    rest = rest.replace(/}/g, "<span class='cssdelimitercolor' style=color:" + cssdelimitercolor + ">}</span>");
-    for (i = 0; i < comment.arr.length; i++) {
-        rest = rest.replace("W3CSSCOMMENTPOS", comment.arr[i]);
-    }
-    return "<span class='cssselectorcolor' style=color:" + cssselectorcolor + ">" + rest + "</span>";
-  }
-  function cssPropertyMode(txt) {
-    var rest = txt, done = "", s, e, n, loop;
-    if (rest.indexOf("{") > -1 ) { return cssMode(rest); }
-    while (rest.search(":") > -1) {
-      s = rest.search(":");
-      loop = true;
-      n = s;
-      while (loop == true) {
-        loop = false;
-        e = rest.indexOf(";", n);
-        if (rest.substring(e - 5, e + 1) == "&nbsp;") {
-          loop = true;
-          n = e + 1;
-        }
-      }
-      if (e == -1) {e = rest.length;}
-      done += rest.substring(0, s);
-      done += cssPropertyValueMode(rest.substring(s, e + 1));
-      rest = rest.substr(e + 1);
-    }
-    return "<span class='csspropertycolor' style=color:" + csspropertycolor + ">" + done + rest + "</span>";
-  }
-  function cssPropertyValueMode(txt) {
-    var rest = txt, done = "", s;
-    rest = "<span class='cssdelimitercolor' style=color:" + cssdelimitercolor + ">:</span>" + rest.substring(1);
-    while (rest.search(/!important/i) > -1) {
-      s = rest.search(/!important/i);
-      done += rest.substring(0, s);
-      done += cssImportantMode(rest.substring(s, s + 10));
-      rest = rest.substr(s + 10);
-    }
-    result = done + rest;    
-    if (result.substr(result.length - 1, 1) == ";" && result.substr(result.length - 6, 6) != "&nbsp;" && result.substr(result.length - 4, 4) != "&lt;" && result.substr(result.length - 4, 4) != "&gt;" && result.substr(result.length - 5, 5) != "&amp;") {
-      result = result.substring(0, result.length - 1) + "<span class='cssdelimitercolor' style=color:" + cssdelimitercolor + ">;</span>";
-    }
-    return "<span class='csspropertyvaluecolor' style=color:" + csspropertyvaluecolor + ">" + result + "</span>";
-  }
-  function cssImportantMode(txt) {
-    return "<span class='cssimportantcolor' style=color:" + cssimportantcolor + ";font-weight:bold;>" + txt + "</span>";
-  }
+  function attributeValueMode(txt){ return "<span class='attributevaluecolor' style=color:"+attributevaluecolor+">"+txt+"</span>";}
+  function angularMode(txt){ return "<span class='angularstatementcolor' style=color:"+angularstatementcolor+">"+txt+"</span>";}
+  function commentMode(txt){ return "<span class='commentcolor' style=color:" + commentcolor + ">"+txt+"</span>";}
   function jsMode(txt) {
-    var rest = txt, done = "", esc = [], i, cc, tt = "", sfnuttpos, dfnuttpos, compos, comlinepos, keywordpos, numpos, mypos, dotpos, y;
-    for (i = 0; i < rest.length; i++)  {
-      cc = rest.substr(i, 1);
-      if (cc == "\\") {
-        esc.push(rest.substr(i, 2));
-        cc = "W3JSESCAPE";
-        i++;
-      }
-      tt += cc;
-    }
+    var rest =txt, done="", esc=[], i, cc, tt="", sfnuttpos,dfnuttpos,compos,comlinepos,keywordpos,numpos,mypos,dotpos,y;
+    for (i=0; i<rest.length; i++){ cc = rest.substr(i,1); if (cc=="\\"){esc.push(rest.substr(i,2)); cc="W3JSESCAPE";i++;} tt += cc; }
     rest = tt;
     y = 1;
     while (y == 1) {
@@ -251,97 +124,27 @@ function w3CodeColorize(x, lang) {
       }
     }
     rest = done + rest;
-    for (i = 0; i < esc.length; i++) {
-      rest = rest.replace("W3JSESCAPE", esc[i]);
-    }
+    for (i=0; i<esc.length; i++) { rest = rest.replace("W3JSESCAPE", esc[i]); }
     return "<span class='jscolor' style=color:" + jscolor + ">" + rest + "</span>";
   }
-  function jsStringMode(txt) {
-    return "<span class='jsstringcolor' style=color:" + jsstringcolor + ">" + txt + "</span>";
-  }
-  function jsKeywordMode(txt) {
-    return "<span class='jskeywordcolor' style=color:" + jskeywordcolor + ">" + txt + "</span>";
-  }
-  function jsNumberMode(txt) {
-    return "<span class='jsnumbercolor' style=color:" + jsnumbercolor + ">" + txt + "</span>";
-  }
-  function jsPropertyMode(txt) {
-    return "<span class='jspropertycolor' style=color:" + jspropertycolor + ">" + txt + "</span>";
-  }
+  function jsStringMode(txt)  {return "<span class='jsstringcolor' style=color:" + jsstringcolor + ">"+txt+"</span>";}
+  function jsKeywordMode(txt) {return "<span class='jskeywordcolor' style=color:"+ jskeywordcolor + ">"+txt+"</span>";}
+  function jsNumberMode(txt)  {return "<span class='jsnumbercolor' style=color:" + jsnumbercolor + ">"+txt+"</span>";}
+  function jsPropertyMode(txt){return "<span class='jspropertycolor' style=color:"+ jspropertycolor + ">"+txt+"</span>";}
   function getDotPos(txt, func) {
-    var x, i, j, s, e, arr = [".","<", " ", ";", "(", "+", ")", "[", "]", ",", "&", ":", "{", "}", "/" ,"-", "*", "|", "%"];
+    var x, i, j, s, e, arr=[".","<"," ",";","(","+",")","[","]",",","&",":","{","}","/","-","*","|","%"];
     s = txt.indexOf(".");
     if (s > -1) {
       x = txt.substr(s + 1);
-      for (j = 0; j < x.length; j++) {
-        cc = x[j];
-        for (i = 0; i < arr.length; i++) {
-          if (cc.indexOf(arr[i]) > -1) {
-            e = j;
-            return [s + 1, e + s + 1, func];
-          }
-        }
-      }
+      for (j=0; j<x.length; j++){ cc = x[j]; for (i = 0; i < arr.length; i++){ if (cc.indexOf(arr[i]) > -1){ e = j; return [s + 1, e + s + 1, func]; }}}
     }
     return [-1, -1, func];
   }
   function getMinPos() {
     var i, arr = [];
-    for (i = 0; i < arguments.length; i++) {
-      if (arguments[i][0] > -1) {
-        if (arr.length == 0 || arguments[i][0] < arr[0]) {arr = arguments[i];}
-      }
-    }
+    for (i = 0; i < arguments.length; i++){ if (arguments[i][0] > -1){ if (arr.length == 0 || arguments[i][0] < arr[0]) {arr = arguments[i];}}}
     if (arr.length == 0) {arr = arguments[i];}
     return arr;
-  }
-  function javaMode(txt) {
-    var rest = txt, done = "", esc = [], i, cc, tt = "", sfnuttpos, dfnuttpos, compos, comlinepos, keywordpos, numpos, mypos, dotpos, y;
-    for (i = 0; i < rest.length; i++)  {
-      cc = rest.substr(i, 1);
-      if (cc == "\\") {
-        esc.push(rest.substr(i, 2));
-        cc = "W3JSESCAPE";
-        i++;
-      }
-      tt += cc;
-    }
-    rest = tt;
-    y = 1;
-    while (y == 1) {
-      sfnuttpos = getPos(rest, "'", "'", javaStringMode);
-      dfnuttpos = getPos(rest, '"', '"', javaStringMode);
-      compos = getPos(rest, /\/\*/, "*/", commentMode);
-      comlinepos = getPos(rest, /\/\//, "<br>", commentMode);      
-      numpos = getNumPos(rest, javaNumberMode);
-      keywordpos = getKeywordPos("java", rest, javaKeywordMode);
-      dotpos = getDotPos(rest, javaPropertyMode);
-      if (Math.max(numpos[0], sfnuttpos[0], dfnuttpos[0], compos[0], comlinepos[0], keywordpos[0], dotpos[0]) == -1) {break;}
-      mypos = getMinPos(numpos, sfnuttpos, dfnuttpos, compos, comlinepos, keywordpos, dotpos);
-      if (mypos[0] == -1) {break;}
-      if (mypos[0] > -1) {
-        done += rest.substring(0, mypos[0]);
-        done += mypos[2](rest.substring(mypos[0], mypos[1]));
-        rest = rest.substr(mypos[1]);
-      }
-    }
-    rest = done + rest;
-    for (i = 0; i < esc.length; i++) {
-      rest = rest.replace("W3JSESCAPE", esc[i]);
-    }
-    return "<span class='javacolor' style=color:" + javacolor + ">" + rest + "</span>";
-  }
-  function javaStringMode(txt) {
-    return "<span class='javastringcolor' style=color:" + javastringcolor + ">" + txt + "</span>";
-  }
-  function javaKeywordMode(txt) {
-    return "<span class='javakeywordcolor' style=color:" + javakeywordcolor + ">" + txt + "</span>";
-  }
-  function javaNumberMode(txt) {
-    return "<span class='javanumbercolor' style=color:" + javanumbercolor + ">" + txt + "</span>";
-  }
-  function javaPropertyMode(txt) {
-    return "<span class='javapropertycolor' style=color:" + javapropertycolor + ">" + txt + "</span>";
   }
   function pythonMode(txt) {
     var rest = txt, done = "", sfnuttpos, dfnuttpos, compos, comlinepos, comhashpos, keywordpos, mypos, y;
@@ -355,88 +158,56 @@ function w3CodeColorize(x, lang) {
       keywordpos = getKeywordPos("python", rest, pythonKeywordMode);      
       if (Math.max(numpos[0], sfnuttpos[0], dfnuttpos[0], compos[0], comhashpos[0], keywordpos[0]) == -1) {break;}
       mypos = getMinPos(numpos, sfnuttpos, dfnuttpos, compos, comhashpos, keywordpos);
-      if (mypos[0] == -1) {break;}
-      if (mypos[0] > -1) {
-        done += rest.substring(0, mypos[0]);
-        done += mypos[2](rest.substring(mypos[0], mypos[1]));
-        rest = rest.substr(mypos[1]);
-      }
+      if (mypos[0]== -1){break;}
+      if (mypos[0] > -1){ done += rest.substring(0,mypos[0]); done += mypos[2](rest.substring(mypos[0], mypos[1])); rest=rest.substr(mypos[1]); }
     }
     rest = done + rest;
     return "<span class='pythoncolor' style=color:" + pythoncolor + ">" + rest + "</span>";
   }
-  function pythonStringMode(txt) {
-    return "<span class='pythonstringcolor' style=color:" + pythonstringcolor + ">" + txt + "</span>";
-  }
-  function pythonNumberMode(txt) {
-    return "<span class='pythonnumbercolor' style=color:" + pythonnumbercolor + ">" + txt + "</span>";
-  }
-  function pythonKeywordMode(txt) {
-    return "<span class='pythonkeywordcolor' style=color:" + pythonkeywordcolor + ">" + txt + "</span>";
-  }
+  function pythonStringMode(txt) { return "<span class='pythonstringcolor' style=color:" + pythonstringcolor + ">" + txt + "</span>"; }
+  function pythonNumberMode(txt) { return "<span class='pythonnumbercolor' style=color:" + pythonnumbercolor + ">" + txt + "</span>"; }
+  function pythonKeywordMode(txt){ return "<span class='pythonkeywordcolor' style=color:"+ pythonkeywordcolor + ">" + txt + "</span>";}
   function getKeywordPos(typ, txt, func) {
     var words, i, pos, rpos = -1, rpos2 = -1, patt;
     if (typ == "js") {
-      words = ["abstract","arguments","boolean","break","byte","case","catch","char","class","const","continue","debugger","default","delete",
-      "do","double","else","enum","eval","event","export","extends","false","final","finally","float","for","function","goto","if","implements","import",
-      "in","instanceof","int","interface","let","long","NaN","native","new","null","package","private","protected","public","return","short","static",
-      "super","switch","synchronized","this","throw","throws","transient","true","try","typeof","var","void","volatile","while","with","yield"];
-    } else if (typ == "java") {
-      words = ["abstract","arguments","boolean","break","byte","case","catch","char","class","const","continue","debugger","default","delete",
-      "do","double","else","enum","eval","event","export","extends","false","final","finally","float","for","function","goto","if","implements","import",
-      "in","instanceof","int","interface","let","long","NaN","native","new","null","package","private","protected","public","return","short","static",
-      "super","switch","synchronized","this","throw","throws","transient","true","try","typeof","var","void","volatile","while","with","yield",
-      "String"];
+      words = ["abstract","arguments","boolean","break","byte","case","catch","char","class","const","continue","debugger","default","delete","do","double","else","enum","eval",
+      "event","export","extends","false","final","finally","float","for","function","goto","if","implements","import","in","instanceof","int","interface","let","long","NaN","native",
+      "new","null","package","private","protected","public","return","short","static","super","switch","synchronized","this","throw","throws","transient","true","try","typeof",
+      "var","void","volatile","while","with","yield"];
     } else if (typ == "python") {
-      words = ["as", "assert", "break", "class", "continue", "def", "del", "elif", "else", "except", "finally", "for", "from", "global", "if", "import",
-      "lambda", "pass", "raise", "return", "try", "while", "with", "yield", "in", "abs", "all", "any", "bin", "bool", "bytearray", "callable", "chr",
-      "classmethod", "compile", "complex", "delattr", "dict", "dir", "divmod", "enumerate", "eval", "filter", "float", "format", "frozenset", "getattr",
-      "globals", "hasattr", "hash", "help", "hex", "id", "input", "int", "isinstance", "issubclass", "iter", "len", "list", "locals", "map", "max",
-      "memoryview", "min", "next", "object", "oct", "open", "ord", "pow", "print", "property", "range", "repr", "reversed", "round", "set", "setattr", "slice",
-      "sorted", "staticmethod", "str", "sum", "super", "tuple", "type", "vars", "zip", "__import__", "NotImplemented", "Ellipsis", "__debug__"];
+      words = ["as","assert","break","class","continue","def","del","elif","else","except","finally","for","from","global", "if", "import","lambda","pass","raise","return",
+      "try","while","with","yield","in","abs","all","any","bin","bool","bytearray","callable","chr","classmethod","compile","complex","delattr","dict","dir","divmod","enumerate",
+      "eval","filter","float","format","frozenset","getattr","globals","hasattr","hash","help","hex","id","input","int","isinstance","issubclass","iter","len","list","locals",
+      "map","max","memoryview","min","next","object","oct","open","ord","pow","print","property","range","repr","reversed","round","set","setattr","slice","sorted",
+      "staticmethod","str","sum","super","tuple","type","vars","zip","__import__","NotImplemented","Ellipsis","__debug__"];
     }
     for (i = 0; i < words.length; i++) {
       pos = txt.indexOf(words[i]);
       if (pos > -1) {
         patt = /\W/g;
-        if (txt.substr(pos + words[i].length,1).match(patt) && txt.substr(pos - 1,1).match(patt)) {
-          if (pos > -1 && (rpos == -1 || pos < rpos)) {
-            rpos = pos;
-            rpos2 = rpos + words[i].length;
-          }
+        if (txt.substr(pos+words[i].length,1).match(patt) && txt.substr(pos-1,1).match(patt)) {
+          if (pos > -1 &&(rpos== -1 || pos<rpos)){ rpos=pos; rpos2=rpos+words[i].length; }
         }
       } 
     }
     return [rpos, rpos2, func];
   }
   function getPos(txt, start, end, func) {
-    var s, e;
-    s = txt.search(start);
-    e = txt.indexOf(end, s + (end.length));
-    if (e == -1) {e = txt.length;}
-    return [s, e + (end.length), func];
+    var s = txt.search(start); var e = txt.indexOf(end, s+(end.length));
+    if (e== -1){e=txt.length;}
+    return [s,e+(end.length),func];
   }
   function getNumPos(txt, func) {
-    var arr = ["<br>", " ", ";", "(", "+", ")", "[", "]", ",", "&", ":", "{", "}", "/" ,"-", "*", "|", "%", "="], i, j, c, startpos = 0, endpos, word;
-    for (i = 0; i < txt.length; i++) {
-      for (j = 0; j < arr.length; j++) {
-        c = txt.substr(i, arr[j].length);
-        if (c == arr[j]) {
-          if (c == "-" && (txt.substr(i - 1, 1) == "e" || txt.substr(i - 1, 1) == "E")) {
-            continue;
-          }
-          endpos = i;
-          if (startpos < endpos) {
-            word = txt.substring(startpos, endpos);
-            if (!isNaN(word)) {return [startpos, endpos, func];}
-          }
-          i += arr[j].length;
-          startpos = i;
-          i -= 1;
-          break;
-        }
-      }
-    }  
-    return [-1, -1, func];
+    var arr = ["<br>"," ",";","(","+",")","[","]",",","&",":","{","}","/","-","*","|","%","="], i,j,c, startpos=0, endpos,word;
+    for (i=0;i<txt.length; i++){ for (j=0;j<arr.length; j++){c=txt.substr(i,arr[j].length);
+     if (c==arr[j]) {
+      if (c=="-"&&(txt.substr(i-1, 1)=="e" || txt.substr(i-1, 1) == "E")){continue;}
+       endpos = i;
+       if (startpos<endpos){word=txt.substring(startpos,endpos); if (!isNaN(word)){return [startpos,endpos,func];}}
+       i += arr[j].length; startpos=i; i -= 1;
+       break;
+     }
+    }}  
+    return [-1,-1,func];
   }  
 }

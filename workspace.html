@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./w3-codecolor.js"></script>
     <script src="./customblocks.js"></script>
+    <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
     <style>.sc {overflow: auto;} .title * { display:inline-block;min-width:32px; }
     .bord { border:1px solid rgb(180,180,180);border-radius:2px; }
     .Abtn {background-color:rgb(233,233,237);padding: 2px 4px 2px 4px;border:1px solid rgb(143,143,157);border-radius:5px;cursor:pointer;}
@@ -20,44 +21,73 @@
     .city {margin-top:.5rem;}
     .outputFrame { width:100%;height:100%; }
     .titl {font-family:"Segoe UI",Arial,sans-serif;font-weight:610;}
+    .runb {border:1px solid green;padding:4px 8px 4px 8px;width:100%;border-radius:6px;background-color:rgb(230,241,230);transition-property: background-color;
+  transition-duration: .2s;}
+    .runb:hover {background-color:rgb(205,220,205)}
+    .n:hover {background-color:inherit !important;}
+    *{transition-property:background-color;transition-duration: .2s;}
+    .fa-save,.fa-download {padding:0 10px 0 10px;font-size:1.3rem;}
+    .split {display:flex;flex-direction:row}.splitv {display:flex;flex-direction:column}
+.gutter {background:#eee;background-repeat:no-repeat;background-position:50%;z-index:5}
+.gutter.gutter-horizontal{background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');cursor:col-resize;}
+.gutter.gutter-vertical{background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');cursor:row-resize}
+
+#textarea{
+ font-family:consolas,Menlo,"courier new",monospace;
+ font-size:15px;padding:8px;
+ resize:none;border:none;
+ line-height:normal;
+ z-index:0;
+}
     </style>
 
   <div class="w3-bar w3-light-grey">
     <a class="w3-bar-item w3-button w3-black titl"><span class="w3-hide-small w3-hide-medium">InventJS&trade;</span><span class="w3-hide-large">Invent<sub>JS</sub></span></a>
-    <a href="#" class="w3-bar-item w3-button" onclick="saveB()"><span class="btn">Save</span></a>
-    <a href="#" class="w3-bar-item w3-button" onclick="saveBlocks()"><span class="btn">Save As..</span></a>
+
+    <div class="w3-dropdown-hover" style="margin-left:1rem;">
+      <button class="w3-button" onclick="saveB()"><span class="btn"><i class="fa fa-save"></i><i class="fa fa-caret-down"></i></span></button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4" style="z-index:100;">
+        <a href="#" class="w3-bar-item w3-button" onclick="saveB()"><span class="btn">Save</span></a>
+        <a href="#" class="w3-bar-item w3-button" onclick="saveBlocks()"><span class="btn">Save As..</span></a>
+      </div>
+    </div>
+    
     <div class="w3-dropdown-hover">
-      <button class="w3-button"><span class="btn"><i class="fa fa-download w3-hide-large"></i> <span class="w3-hide-medium w3-hide-small">Download</span> <i class="fa fa-caret-down"></i></span></button>
+      <button class="w3-button"><span class="btn"><i class="fa fa-download"></i><i class="fa fa-caret-down"></i></span></button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
         <a href="#" onclick="downloadP('test')" class="w3-bar-item w3-button"><span class="btn">Download Blocks...</span></a>
         <a href="#" class="w3-bar-item w3-button"><input type="file" id="files" style="display:none;"/><label for="files" class="btn">Load from Download</label></a>
         <a href="#" onclick="packageHTML()" class="w3-bar-item w3-button"><span class="btn">Download as Runnable Webpage</span></a>
       </div>
     </div>
-    <a href="#" class="w3-bar-item w3-button"><span onclick="runC()">Run<span class="w3-hide-small"> Project</span> <i class="fa fa-play" style="color:green"></i></span></a>
+    <a href="#" class="w3-bar-item w3-button n"><span onclick="runC()" class="runb">Run <i class="fa fa-play" style="color:green"></i></span></a>
   </div>
 
-  <div class="w3-container" style="padding-top:.5rem;padding-left:.8rem;">
-    <div class="w3-row">
+  <div class="w3-container" style="padding-top:.5rem;padding-left:.7rem;padding-right:0;">
+    <div class="w3-row split">
     <div class="sc w3-mobile" id="blocklyArea" style="width:56%;float:left;widtah:55vw;height:88vh;">
         <div id="blocklyDiv" class="sc1 bord"></div>
     </div>
 
-    <div class="w3-mobile" style="width:44%;wiadth:41vw;display:inline-block;padding-left:.2rem;margin-top:-3rem;">
+    <div class="w3-mobile" id="outarea" style="width:44%;wiadth:41vw;display:inline-block;padding-left:0;margin-top:-3rem;">
       <div class="w3-bar w3-blak" style="margin:0;padding:0;">
         <span class="w3-bar-item w3-hide-small w3-hide-medium">Code Output: </span>
         <button class="w3-bar-item w3-button tablink w3-gblack" onclick="openCity(event,'djs')">JS</button>
-        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'dpy')">Python</button>
+        <!--<button class="w3-bar-item w3-button tablink" onclick="openCity(event,'dpy')">Python</button>-->
       </div>
-      <div id="djs" class="w3-container w3-border city"><div id="textarea" style="height:38vh;padding-top:1rem;width:100%;" class="jsHigh sc">&nbsp;</div></div>
-      <div id="dpy" class="w3-container w3-border city" style="display:none"><div id="textpy" style="height:38vh;padding-top:1rem;" class="pythonHigh sc">&nbsp;</div></div>
+        <div id="djs" class="w3-container w3-border city"><div id="textarea" style="height:38vh;padding-top:1rem;width:100%;" class="jsHigh sc">&nbsp;</div></div>
+        <!--<div id="dpy" class="w3-container w3-border city" style="display:none"><div id="textpy" style="height:38vh;padding-top:1rem;" class="pythonHigh sc">&nbsp;</div></div>-->
       <div class="title" style="margin:2px;">Output: </div>
-      <div id="output" class="bord bbg" style="height:44vh;padding:8px;"></div>
+      <div id="output" class="bord bbg" style="height:44vh;padding:8px;z-index:100;"></div>
     </div>
     </div>
     <div style="position:absolute;bottom:4px;left:1rem;" class="w3-container w3-light-gray w3-hide-small w3-hide-medium">
       InventJS&trade; &copy; 2021 by Isaiah. <a target="_blank" href="https://developers.google.com/blockly">Blocky API</a> by Google
     </div>
+    <script>
+    var inst = Split(['#blocklyArea','#outarea'],{ minSize:200,gutterAlign:'end',snapOffset:10,dragInterval:5 });
+    inst.setSizes([55, 44])
+    </script>
 
 
     <xml id="toolbox" style="display: none">
@@ -208,6 +238,12 @@ custom="PROCEDURE"></category>
         <block type="js_left"></block>
         <block type="js_bg"></block>
         <block type="js_display"></block>
+      </category>
+      <category name="JS Events" colour="255">
+        <block type="js_onclick"></block>
+        <block type="js_keydown"></block>
+        <block type="js_keyup"></block>
+        <block type="js_keychar"></block>
       </category>
     </xml>
   </div>
