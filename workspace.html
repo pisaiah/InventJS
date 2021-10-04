@@ -97,7 +97,7 @@
   <block type="logic_operation"></block>
   <block type="logic_negate"></block>
   <block type="logic_boolean"></block>
-  <block type="logic_null" disabled="true"></block>
+  <block type="logic_null"></block>
   <block type="logic_ternary"></block>
 </category>
 <category name="Loops" categorystyle="loop_category">
@@ -140,8 +140,7 @@
   </block>
   <block type="math_constrain">
     <value name="VALUE"><shadow type="math_number"><field name="NUM">50</field></shadow></value>
-    <value name="LOW"><shadow type="math_number"><field name="NUM">1</field></shadow>
-    </value>
+    <value name="LOW"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
     <value name="HIGH"><shadow type="math_number"><field name="NUM">100</field></shadow></value>
   </block>
   <block type="math_random_int">
@@ -230,20 +229,26 @@ custom="PROCEDURE"></category>
         <block type="js_onclick"></block>
         <block type="js_elm_x"></block>
         <block type="js_elm_y"></block>
-        <block type="js_keydown"></block>
+        <block type="js_remove"></block>
+        <block type="js_coll"></block>
       </category>
-      <category name="UI Styles" colour="255">
+      <category name="UI Styles" colour="180">
         <block type="js_pos"></block>
         <block type="js_top"></block>
         <block type="js_left"></block>
         <block type="js_bg"></block>
         <block type="js_display"></block>
+        <block type="js_fontSize"></block>
       </category>
-      <category name="JS Events" colour="255">
+      <category name="Events" colour="255">
         <block type="js_onclick"></block>
         <block type="js_keydown"></block>
         <block type="js_keyup"></block>
         <block type="js_keychar"></block>
+      </category>
+      <category name="Timer" colour="200">
+        <block type="js_runlater"></block>
+        <block type="js_test"></block>
       </category>
     </xml>
   </div>

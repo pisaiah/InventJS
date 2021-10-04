@@ -1,4 +1,4 @@
-const projectVersion = "1.0-indev (Sept 25th, 2021)";
+const projectVersion = "1.0-indev (Oct 4th, 2021)";
 var w = 0.99;
 
 if (undefined != Blockly) {
@@ -45,6 +45,20 @@ var blocklyArea = document.getElementById('blocklyArea');
              "&nbsp;&nbsp;&nbsp;&nbsp;document.body.appendChild(btn);<br>}";
   if (ta.innerHTML.toString().includes("helper_createElement") && !(ta.innerHTML.toString().includes("function helper_createElement"))){ ta.innerHTML += demo; }
   
+  var dem1 = "<br>// Auto-generated helper function<br>function helper_isCollision(d1,d2){<br>" +
+   "&nbsp;&nbsp;&nbsp&nbsp;d1 = document.getElementById(d1); d2 = document.getElementById(d2); " +
+   "&nbsp;&nbsp;&nbsp&nbsp;if (undefined == d1 || undefined == d2) return false;" +
+   "&nbsp;&nbsp;&nbsp&nbsp;var aX = parseInt(d1.style.left.replace('px','')) + (d1.offsetWidth/2);<br>" +
+   "&nbsp;&nbsp;&nbsp&nbsp;var bX = parseInt(d2.style.left.replace('px','')) + (d2.offsetWidth/2);<br>" +
+   "&nbsp;&nbsp;&nbsp&nbsp;var ox = Math.abs(aX-bX) < (d1.offsetWidth+8);<br>" +
+   "&nbsp;&nbsp;&nbsp&nbsp;if (!ox) return false;<br>" +
+   "&nbsp;&nbsp;&nbsp&nbsp;var aY = parseInt(d1.style.top.replace('px','')) + (d1.offsetHeight/2);<br>" +
+   "&nbsp;&nbsp;&nbsp&nbsp;var bY = parseInt(d2.style.top.replace('px','')) + (d2.offsetHeight/2);<br>" +
+   "&nbsp;&nbsp;&nbsp&nbsp;var oy = Math.abs(aY-bY) < d1.offsetHeight+1;<br>" +
+   "return oy;<br>}";
+  
+  if (ta.innerHTML.toString().includes("helper_isCollision") && !(ta.innerHTML.toString().includes("function helper_isCollision"))) {ta.innerHTML += dem1; }
+
   /*try {
       var py = Blockly.Python.workspaceToCode(workspace);
       var spli = py.replaceAll("  ","&nbsp;&nbsp;&nbsp;").split("\n");
@@ -60,11 +74,23 @@ var blocklyArea = document.getElementById('blocklyArea');
 workspace.addChangeListener(myUpdateFunction);
 
 var helper_createElm = " function helper_createElement(type, id){ var btn = document.createElement(type); btn.setAttribute('id', id);document.getElementById('output').appendChild(btn);} ";
+var helper_isCollision = " function helper_isCollision(d1,d2){\
+    d1 = document.getElementById(d1); d2 = document.getElementById(d2);\
+    if (undefined == d1 || undefined == d2) return false;\
+    var aX = parseInt(d1.style.left.replace('px','')) + (d1.offsetWidth/2);\
+    var bX = parseInt(d2.style.left.replace('px','')) + (d2.offsetWidth/2);\
+    var ox = Math.abs(aX-bX) < (d1.offsetWidth-1);\
+    if (!ox) return false;\
+    var aY = parseInt(d1.style.top.replace('px','')) + (d1.offsetHeight/2);\
+    var bY = parseInt(d2.style.top.replace('px','')) + (d2.offsetHeight/2);\
+    var oy = Math.abs(aY-bY) < d1.offsetHeight-1;\
+    return oy;\
+}";
 
 var code;
 function runC() {
    removeAllChildNodes(document.getElementById('output'));
-   code = Blockly.JavaScript.workspaceToCode(workspace) + helper_createElm;
+   code = Blockly.JavaScript.workspaceToCode(workspace) + helper_createElm + helper_isCollision;
 
    var text = decodeURIComponent("%3Chtml%3E%3Cdiv%20id%3D'output'%3E%3C%2Fdiv%3E%3Cscript%3Eeval(parent.code);%3C%2Fscript%3E%3C%2Fhtml%3E");
    text = text.replace("CODE_HERE", encodeURIComponent(code));
@@ -85,7 +111,7 @@ function runC() {
 
 function packageHTML() {
    var code = Blockly.JavaScript.workspaceToCode(workspace);
-   var text = decodeURIComponent("%3Chtml%3E%3Cdiv%20id%3D'output'%3E%3C%2Fdiv%3E%3Cscript%3E " + helper_createElm + " CODE_HERE;%3C%2Fscript%3E%3C%2Fhtml%3E");
+   var text = decodeURIComponent("%3Chtml%3E%3Cdiv%20id%3D'output'%3E%3C%2Fdiv%3E%3Cscript%3E " + helper_createElm + helper_isCollision + " CODE_HERE;%3C%2Fscript%3E%3C%2Fhtml%3E");
    text = text.replace("CODE_HERE", code);
    download(pId + ".html", text);
 }
