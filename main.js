@@ -7,7 +7,6 @@ var blocklyArea = document.getElementById('blocklyArea');
   var blocklyDiv = document.getElementById('blocklyDiv');
   var workspace = Blockly.inject(blocklyDiv, {toolbox: document.getElementById('toolbox')});
   var onresize = function(e) {
-    // Compute the absolute coordinates and dimensions of blocklyArea.
     var element = blocklyArea;
     var x = 0;
     var y = 0;
@@ -25,6 +24,7 @@ var blocklyArea = document.getElementById('blocklyArea');
   };
   window.addEventListener('resize', onresize, false);
   onresize();
+  new ResizeObserver(onresize).observe(document.getElementById('outarea'));
   Blockly.svgResize(workspace);
 
       function myUpdateFunction(event) {
@@ -34,8 +34,7 @@ var blocklyArea = document.getElementById('blocklyArea');
   var ta = document.getElementById('textarea');
   document.getElementById('textarea').innerHTML = "";
   for (var i =0; i < spli.length; i++) {
-    if (spli[i].length > 0)
-        document.getElementById('textarea').innerHTML += spli[i].replaceAll('[;]', ';<br>') + "<br>";
+    if (spli[i].length > 0) document.getElementById('textarea').innerHTML += spli[i].replaceAll('[;]', ';<br>') + "<br>";
   }
 
   var demo = "<br>// Auto-generated helper function.<br>" + 
@@ -59,32 +58,21 @@ var blocklyArea = document.getElementById('blocklyArea');
   
   if (ta.innerHTML.toString().includes("helper_isCollision") && !(ta.innerHTML.toString().includes("function helper_isCollision"))) {ta.innerHTML += dem1; }
 
-  /*try {
-      var py = Blockly.Python.workspaceToCode(workspace);
-      var spli = py.replaceAll("  ","&nbsp;&nbsp;&nbsp;").split("\n");
-      document.getElementById('textpy').innerHTML = "";
-      for (var i =0; i < spli.length; i++) document.getElementById('textpy').innerHTML += spli[i] + "<br>";
-  } catch (error) {
-    if (error.toString().indexOf('does not know how to generate code for block type "js_') != -1)
-        error = '<b>Error:</b><br>Language "Python" does not know how to generate code for <b>JS-only blocks.</b>';
-    document.getElementById('textpy').innerHTML = error;
-  } */
   w3CodeColor();
 }
 workspace.addChangeListener(myUpdateFunction);
 
+
 var helper_createElm = " function helper_createElement(type, id){ var btn = document.createElement(type); btn.setAttribute('id', id);document.getElementById('output').appendChild(btn);} ";
 var helper_isCollision = " function helper_isCollision(d1,d2){\
-    d1 = document.getElementById(d1); d2 = document.getElementById(d2);\
-    if (undefined == d1 || undefined == d2) return false;\
-    var aX = parseInt(d1.style.left.replace('px','')) + (d1.offsetWidth/2);\
-    var bX = parseInt(d2.style.left.replace('px','')) + (d2.offsetWidth/2);\
-    var ox = Math.abs(aX-bX) < (d1.offsetWidth-1);\
-    if (!ox) return false;\
-    var aY = parseInt(d1.style.top.replace('px','')) + (d1.offsetHeight/2);\
-    var bY = parseInt(d2.style.top.replace('px','')) + (d2.offsetHeight/2);\
-    var oy = Math.abs(aY-bY) < d1.offsetHeight-1;\
-    return oy;\
+  d1 = document.getElementById(d1); d2 = document.getElementById(d2);\
+  if (undefined==d1 || undefined==d2) return false;\
+  var aX = parseInt(d1.style.left.replace('px','')) + (d1.offsetWidth/2);\
+  var bX = parseInt(d2.style.left.replace('px','')) + (d2.offsetWidth/2);\
+  var ox = Math.abs(aX-bX) < (d1.offsetWidth-1); if (!ox) return false;\
+  var aY = parseInt(d1.style.top.replace('px',''))+(d1.offsetHeight/2);\
+  var bY = parseInt(d2.style.top.replace('px',''))+(d2.offsetHeight/2);\
+  var oy = Math.abs(aY-bY) < d1.offsetHeight-1; return oy;\
 }";
 
 var code;

@@ -418,13 +418,33 @@ Blockly.Blocks['js_coll'] = {
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(160);
-    this.setTooltip('Block form of Javascript\'s "getElementById(id)"');
   }
 };
-
 
 Blockly.JavaScript['js_coll'] = function(block) {
   var arg0 = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\''
   var arg1 = Blockly.JavaScript.valueToCode(block, 'VAL1', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
   return ['helper_isCollision(' + arg0 + ', ' + arg1 + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
+
+Blockly.Blocks['js_innerWidth'] = {
+  init: function() {
+    this.appendDummyInput('VALUE').appendField('window.innerWidth');
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(210);
+  }
+};
+
+Blockly.JavaScript['js_innerWidth'] = function(block) { return ['window.innerWidth', Blockly.JavaScript.ORDER_FUNCTION_CALL]; };
+
+Blockly.Blocks['js_innerHeight'] = {
+  init: function() {
+    this.appendDummyInput('VALUE').appendField('window.innerHeight');
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(210);
+  }
+};
+
+Blockly.JavaScript['js_innerHeight'] = function(block) { return ['window.innerHeight', Blockly.JavaScript.ORDER_FUNCTION_CALL]; };
